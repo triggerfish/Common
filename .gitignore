@@ -4,7 +4,6 @@
 **/*.sln*
 bin
 obj
-_ReSharper*
 dist
 output
 build
@@ -23,4 +22,5 @@ TestResults
 *~
 
 *.swp
-TestResult.xml
+
+*.log
