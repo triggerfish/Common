@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Triggerfish.Web", "Triggerfish.Web\Triggerfish.Web.csproj", "{28DA4932-D17A-44A3-808A-76CC41EBD4A7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Triggerfish.Web.Tests", "Triggerfish.Web.Tests\Triggerfish.Web.Tests.csproj", "{40880635-D003-4381-A00D-4C46EB29C64A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Triggerfish.Testing", "Triggerfish.Testing\Triggerfish.Testing.csproj", "{3B9D3153-0029-4B08-AE6D-3DC1963662F3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Triggerfish.Testing.Tests", "Triggerfish.Testing.Tests\Triggerfish.Testing.Tests.csproj", "{DC279EB2-B6C6-4243-B49F-5B56F2949128}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{28DA4932-D17A-44A3-808A-76CC41EBD4A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28DA4932-D17A-44A3-808A-76CC41EBD4A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28DA4932-D17A-44A3-808A-76CC41EBD4A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28DA4932-D17A-44A3-808A-76CC41EBD4A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{40880635-D003-4381-A00D-4C46EB29C64A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40880635-D003-4381-A00D-4C46EB29C64A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40880635-D003-4381-A00D-4C46EB29C64A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40880635-D003-4381-A00D-4C46EB29C64A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3B9D3153-0029-4B08-AE6D-3DC1963662F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B9D3153-0029-4B08-AE6D-3DC1963662F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B9D3153-0029-4B08-AE6D-3DC1963662F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B9D3153-0029-4B08-AE6D-3DC1963662F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC279EB2-B6C6-4243-B49F-5B56F2949128}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC279EB2-B6C6-4243-B49F-5B56F2949128}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC279EB2-B6C6-4243-B49F-5B56F2949128}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC279EB2-B6C6-4243-B49F-5B56F2949128}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
