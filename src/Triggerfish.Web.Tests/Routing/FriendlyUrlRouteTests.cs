@@ -35,9 +35,9 @@ namespace Triggerfish.Web.Tests
 		{
 			FriendlyUrlRoute route = new FriendlyUrlRoute("{controller}/{action}", new MvcRouteHandler());
 
-			RouteValueDictionary values = new RouteValueDictionary(new { controller = "the controller", action = "the action" });
+			RouteValueDictionary values = new RouteValueDictionary(new { controller = "Controller", action = "Action" });
 
-			MvcAssert.IsInboundRouteCorrect(values, "~/the-controller/the-action", route);
+			MvcAssert.IsInboundRouteCorrect(values, "~/controller/action", route);
 		}
 
 		[TestMethod]
@@ -45,7 +45,7 @@ namespace Triggerfish.Web.Tests
 		{
 			FriendlyUrlRoute route = new FriendlyUrlRoute("artists/{genre}", new RouteValueDictionary(new { controller = "Artists", action = "List" }), new MvcRouteHandler());
 
-			RouteValueDictionary values = new RouteValueDictionary(new { controller = "artists", action = "list", genre = "pop" });
+			RouteValueDictionary values = new RouteValueDictionary(new { controller = "Artists", action = "List", genre = "pop" });
 
 			MvcAssert.IsInboundRouteCorrect(values, "~/artists/pop", route);
 		}

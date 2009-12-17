@@ -10,6 +10,12 @@ namespace Triggerfish.Web.Tests
 	public class UrlExtensionsTests
 	{
 		[TestMethod]
+		public void ShouldCapitaliseWord()
+		{
+			Assert.AreEqual("Plibble", "plibble".Capitalise());
+		}
+
+		[TestMethod]
 		public void ShouldEncodeAllValues()
 		{
 			RouteValueDictionary expected = new RouteValueDictionary(new
