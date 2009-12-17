@@ -1,7 +1,6 @@
 
 **/*.suo
 **/*.user
-**/*.sln*
 bin
 obj
 dist
