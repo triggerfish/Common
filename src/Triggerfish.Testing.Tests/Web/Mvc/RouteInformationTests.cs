@@ -39,7 +39,7 @@ namespace Triggerfish.Testing.Tests
 		{
 			RouteInformation ri = new RouteInformation("/Artists", RegisterRoutes);
 
-			Assert.AreEqual("~/Artists", ri.Url);
+			Assert.AreEqual("/Artists", ri.Url);
 		}
 
 		[TestMethod]
@@ -47,7 +47,15 @@ namespace Triggerfish.Testing.Tests
 		{
 			RouteInformation ri = new RouteInformation("Artists", RegisterRoutes);
 
-			Assert.AreEqual("~/Artists", ri.Url);
+			Assert.AreEqual("Artists", ri.Url);
+		}
+
+		[TestMethod]
+		public void ShouldNotGetRouteInformationForNullUrl()
+		{
+			RouteInformation ri = new RouteInformation("", RegisterRoutes);
+
+			Assert.IsFalse(ri.Valid);
 		}
 
 		[TestMethod]

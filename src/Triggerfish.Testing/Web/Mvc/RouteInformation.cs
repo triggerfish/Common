@@ -14,7 +14,7 @@ namespace Triggerfish.Testing.Web.Mvc
 	public class RouteInformation
 	{
 		/// <summary>
-		/// Property to get the Url to which this object applies
+		/// Property to get the Url with which this object was constructed
 		/// </summary>
 		public string Url { get; private set; }
 
@@ -43,33 +43,46 @@ namespace Triggerfish.Testing.Web.Mvc
 		public string Action { get { return GetRouteValue("action"); } }
 
 		/// <summary>
-		/// Constructor
+		/// Static creation method
 		/// </summary>
 		/// <param name="a_relativeUrl">The relative url for which to get the route information</param>
 		/// <param name="a_registerRoutes">Delegate instance to register routes</param>
 		/// <returns>A new RouteInformation object for the url</returns>
+		public static RouteInformation Create(string a_relativeUrl, Action<RouteCollection> a_registerRoutes)
+		{
+			return new RouteInformation(a_relativeUrl, a_registerRoutes);
+		}
+
+		/// <summary>
+		/// Constructor
+		/// </summary>
+		/// <param name="a_relativeUrl">The relative url for which to get the route information</param>
+		/// <param name="a_registerRoutes">Delegate instance to register routes</param>
 		public RouteInformation(string a_relativeUrl, Action<RouteCollection> a_registerRoutes)
 		{
-			// make sure the url conforms to expected relative format
-			if (0 != a_relativeUrl.IndexOf("~/"))
-			{
-				if (a_relativeUrl[0] != '/')
-				{
-					a_relativeUrl = "~/" + a_relativeUrl;
-				}
-				else
-				{
-					a_relativeUrl = "~" + a_relativeUrl;
-				}
-			}
+			if (String.IsNullOrEmpty(a_relativeUrl))
+				return;
 
 			Url = a_relativeUrl;
 
-			HttpContextBase context = HttpHelpers.MockHttpContext(a_relativeUrl);
+			// make sure the url conforms to expected relative format
+			string url = a_relativeUrl;
+			if (0 != url.IndexOf("~/"))
+			{
+				if (url[0] != '/')
+				{
+					url = "~/" + url;
+				}
+				else
+				{
+					url = "~" + url;
+				}
+			}
+
 			RouteCollection routes = new RouteCollection();
 			try
 			{
-				RouteValues = InboundRoutingHelpers.GenerateInboundRoute(a_relativeUrl, a_registerRoutes);
+				RouteValues = InboundRoutingHelpers.GenerateInboundRoute(url, a_registerRoutes);
 			}
 			catch (Exception)
 			{
