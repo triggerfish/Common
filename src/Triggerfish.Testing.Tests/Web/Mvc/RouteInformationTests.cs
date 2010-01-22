@@ -23,7 +23,7 @@ namespace Triggerfish.Testing.Tests
 				genre = "All"
 			});
 
-			RouteInformation ri = RouteInformation.Create("~/Artists", RegisterRoutes);
+			RouteInformation ri = new RouteInformation("~/Artists", RegisterRoutes);
 
 			Assert.AreEqual("~/Artists", ri.Url);
 			Assert.IsTrue(ri.Valid);
@@ -37,7 +37,7 @@ namespace Triggerfish.Testing.Tests
 		[TestMethod]
 		public void ShouldProperlyFormatUrl1()
 		{
-			RouteInformation ri = RouteInformation.Create("/Artists", RegisterRoutes);
+			RouteInformation ri = new RouteInformation("/Artists", RegisterRoutes);
 
 			Assert.AreEqual("~/Artists", ri.Url);
 		}
@@ -45,7 +45,7 @@ namespace Triggerfish.Testing.Tests
 		[TestMethod]
 		public void ShouldProperlyFormatUrl2()
 		{
-			RouteInformation ri = RouteInformation.Create("Artists", RegisterRoutes);
+			RouteInformation ri = new RouteInformation("Artists", RegisterRoutes);
 
 			Assert.AreEqual("~/Artists", ri.Url);
 		}
@@ -53,7 +53,7 @@ namespace Triggerfish.Testing.Tests
 		[TestMethod]
 		public void ShouldNotGetRouteInformationForNonExistentRoute()
 		{
-			RouteInformation ri = RouteInformation.Create("/Invalid", RegisterRoutes);
+			RouteInformation ri = new RouteInformation("/Invalid", RegisterRoutes);
 
 			Assert.IsFalse(ri.Valid);
 		}
@@ -61,7 +61,7 @@ namespace Triggerfish.Testing.Tests
 		[TestMethod]
 		public void ShouldNotGetRouteInformationForAbsoluteRoute()
 		{
-			RouteInformation ri = RouteInformation.Create("http://localhost/Artists", RegisterRoutes);
+			RouteInformation ri = new RouteInformation("http://localhost/Artists", RegisterRoutes);
 
 			Assert.IsFalse(ri.Valid);
 		}
@@ -69,7 +69,7 @@ namespace Triggerfish.Testing.Tests
 		[TestMethod]
 		public void ShouldGetAuthoriseRequired()
 		{
-			RouteInformation ri = RouteInformation.Create("/Artists", RegisterRoutes);
+			RouteInformation ri = new RouteInformation("/Artists", RegisterRoutes);
 
 			Assert.IsTrue(ri.DoesActionRequireAuthorisation("Triggerfish.Testing.Tests.WithAuthorise", "Triggerfish.Testing.Tests"));
 		}
@@ -77,7 +77,7 @@ namespace Triggerfish.Testing.Tests
 		[TestMethod]
 		public void ShouldNotGetAuthoriseRequired()
 		{
-			RouteInformation ri = RouteInformation.Create("/Artists", RegisterRoutes);
+			RouteInformation ri = new RouteInformation("/Artists", RegisterRoutes);
 
 			Assert.IsFalse(ri.DoesActionRequireAuthorisation("Triggerfish.Testing.Tests.WithoutAuthorise", "Triggerfish.Testing.Tests"));
 		}

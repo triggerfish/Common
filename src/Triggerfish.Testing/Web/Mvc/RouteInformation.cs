@@ -43,13 +43,12 @@ namespace Triggerfish.Testing.Web.Mvc
 		public string Action { get { return GetRouteValue("action"); } }
 
 		/// <summary>
-		/// Helper method to construct a RouteInformation object and retrieve the
-		/// route data in a single step
+		/// Constructor
 		/// </summary>
 		/// <param name="a_relativeUrl">The relative url for which to get the route information</param>
 		/// <param name="a_registerRoutes">Delegate instance to register routes</param>
 		/// <returns>A new RouteInformation object for the url</returns>
-		public static RouteInformation Create(string a_relativeUrl, Action<RouteCollection> a_registerRoutes)
+		public RouteInformation(string a_relativeUrl, Action<RouteCollection> a_registerRoutes)
 		{
 			// make sure the url conforms to expected relative format
 			if (0 != a_relativeUrl.IndexOf("~/"))
@@ -64,20 +63,17 @@ namespace Triggerfish.Testing.Web.Mvc
 				}
 			}
 
-			RouteInformation ri = new RouteInformation();
-			ri.Url = a_relativeUrl;
+			Url = a_relativeUrl;
 
 			HttpContextBase context = HttpHelpers.MockHttpContext(a_relativeUrl);
 			RouteCollection routes = new RouteCollection();
 			try
 			{
-				ri.RouteValues = InboundRoutingHelpers.GenerateInboundRoute(a_relativeUrl, a_registerRoutes);
+				RouteValues = InboundRoutingHelpers.GenerateInboundRoute(a_relativeUrl, a_registerRoutes);
 			}
 			catch (Exception)
 			{
 			}
-
-			return ri;
 		}
 
 		/// <summary>
