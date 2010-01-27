@@ -9,6 +9,16 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Triggerfish.Testing", "Trig
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Triggerfish.Testing.Tests", "Triggerfish.Testing.Tests\Triggerfish.Testing.Tests.csproj", "{DC279EB2-B6C6-4243-B49F-5B56F2949128}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Triggerfish", "Triggerfish\Triggerfish.csproj", "{C336D362-D101-4103-B3AC-32AE6F77477E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Triggerfish.Tests", "Triggerfish.Tests\Triggerfish.Tests.csproj", "{1B8E97FC-6128-4D4B-996E-536775390671}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Triggerfish.Ninject", "Triggerfish.Ninject\Triggerfish.Ninject.csproj", "{5CA60DF9-2168-4B8C-A359-EBE649F9C7F9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Triggerfish.NHibernate", "Triggerfish.NHibernate\Triggerfish.NHibernate.csproj", "{F8C18AEA-6FAF-4BF2-916C-661325416D62}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Triggerfish.NHibernate.Tests", "Triggerfish.NHibernate.Tests\Triggerfish.NHibernate.Tests.csproj", "{1F0B8D10-DA22-4467-9F5F-87771A1BFE77}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +41,26 @@ Global
 		{DC279EB2-B6C6-4243-B49F-5B56F2949128}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DC279EB2-B6C6-4243-B49F-5B56F2949128}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DC279EB2-B6C6-4243-B49F-5B56F2949128}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C336D362-D101-4103-B3AC-32AE6F77477E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C336D362-D101-4103-B3AC-32AE6F77477E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C336D362-D101-4103-B3AC-32AE6F77477E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C336D362-D101-4103-B3AC-32AE6F77477E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1B8E97FC-6128-4D4B-996E-536775390671}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B8E97FC-6128-4D4B-996E-536775390671}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B8E97FC-6128-4D4B-996E-536775390671}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B8E97FC-6128-4D4B-996E-536775390671}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5CA60DF9-2168-4B8C-A359-EBE649F9C7F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5CA60DF9-2168-4B8C-A359-EBE649F9C7F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5CA60DF9-2168-4B8C-A359-EBE649F9C7F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5CA60DF9-2168-4B8C-A359-EBE649F9C7F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F8C18AEA-6FAF-4BF2-916C-661325416D62}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8C18AEA-6FAF-4BF2-916C-661325416D62}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8C18AEA-6FAF-4BF2-916C-661325416D62}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8C18AEA-6FAF-4BF2-916C-661325416D62}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F0B8D10-DA22-4467-9F5F-87771A1BFE77}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F0B8D10-DA22-4467-9F5F-87771A1BFE77}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F0B8D10-DA22-4467-9F5F-87771A1BFE77}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F0B8D10-DA22-4467-9F5F-87771A1BFE77}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
