@@ -6,12 +6,12 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
-using Triggerfish.Testing.Web.Routing;
+using Triggerfish.Web.Routing.Testing;
 
 namespace Triggerfish.Testing.Tests
 {
 	[TestClass]
-	public class RouteDictionaryTests
+	public class RouteDictionaryComparisonTests
 	{
 		[TestMethod]
 		public void ShouldEquateSelfComparison()

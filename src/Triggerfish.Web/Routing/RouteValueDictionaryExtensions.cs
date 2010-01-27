@@ -12,24 +12,21 @@ namespace Triggerfish.Web.Routing
 	/// <summary>
 	/// Extension methods for url processing
 	/// </summary>
-    public static class UrlExtensions
+    public static class RouteValueDictionaryExtensions
     {
 		/// <summary>
-		/// Converts the first character of a string to uppercase
+		/// Adds a returnUrl parameter to the RouteValueDictionary
 		/// </summary>
-		/// <param name="a_string">The string to convert</param>
-		/// <returns>A copy of the string with the first character capitalised</returns>
-		public static string Capitalise(this string a_string)
+		/// <param name="a_route">The RouteValueDictionary object to amend</param>
+		/// <param name="a_url">The return url</param>
+		/// <returns>The amended RouteValueDictionary object</returns>
+		public static RouteValueDictionary AddReturnUrl(this RouteValueDictionary a_route, string a_url)
 		{
-			if (null == a_string)
-				return null;
-
-			if (a_string.Length <= 1)
-				return a_string.ToUpper();
-
-			char[] c = a_string.ToCharArray();
-			c[0] = Char.ToUpper(c[0]);
-			return new String(c);
+			if (null != a_url && !String.IsNullOrEmpty(a_url))
+			{
+				a_route.Add("returnUrl", a_url);
+			}
+			return a_route;
 		}
 
 		/// <summary>
@@ -40,7 +37,7 @@ namespace Triggerfish.Web.Routing
 		/// <param name="a_route">Route value dictionary containing the route data</param>
 		public static RouteValueDictionary Encode(this RouteValueDictionary a_route)
 		{
-			return a_route.Convert(@" ", @"-");
+			return a_route.Convert(@" ", @"-", true);
 		}
 
 		/// <summary>
@@ -51,15 +48,22 @@ namespace Triggerfish.Web.Routing
 		/// <param name="a_route">Route value dictionary containing the route data</param>
 		public static RouteValueDictionary Decode(this RouteValueDictionary a_route)
 		{
-			return a_route.Convert(@"-", @" ");
+			return a_route.Convert(@"-", @" ", false);
 		}
 
-		private static RouteValueDictionary Convert(this RouteValueDictionary a_route, string a_pattern, string a_replacement)
+		private static RouteValueDictionary Convert(this RouteValueDictionary a_route, string a_pattern, string a_replacement, bool toLower)
 		{
 			foreach (string key in a_route.Select(kvp => kvp.Key).ToList())
 			{
-				string value = ((string)a_route[key]).Trim().ToLower();
-				a_route[key] = Regex.Replace(value, a_pattern, a_replacement);
+				if (a_route[key] is string)
+				{
+					string value = ((string)a_route[key]).Trim();
+					if (toLower)
+					{
+						value = value.ToLower();
+					}
+					a_route[key] = Regex.Replace(value, a_pattern, a_replacement);
+				}
 			}
 
 			return a_route;
