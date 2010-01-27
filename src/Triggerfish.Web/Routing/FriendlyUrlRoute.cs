@@ -45,8 +45,6 @@ namespace Triggerfish.Web.Routing
 			if (null != rd)
 			{
 				rd.Values.Decode();
-				rd.Values["controller"] = ((string)rd.Values["controller"]).Capitalise();
-				rd.Values["action"] = ((string)rd.Values["action"]).Capitalise();
 			}
 			return rd;
 		}
