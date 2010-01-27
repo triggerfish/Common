@@ -6,7 +6,7 @@ using System.Web.Routing;
 using System.Reflection;
 using System.Web.Mvc;
 
-namespace Triggerfish.Testing.Web.Mvc
+namespace Triggerfish.Web.Mvc.Testing
 {
 	/// <summary>
 	/// Helper class to lookup a route based on a string url 
@@ -93,18 +93,26 @@ namespace Triggerfish.Testing.Web.Mvc
 		/// Tests whether the route action requires authorization to be invoked, i.e. it is 
 		/// decorated with the AuthorizeAttribute
 		/// </summary>
-		/// <param name="a_namespace">The full namespace name to which the controller class belongs</param>
-		/// <param name="a_assembly">The full assembly name to which the controller class belongs</param>
 		/// <returns>true if the action requires authorisation, false otherwise</returns>
-		public bool DoesActionRequireAuthorisation(string a_namespace, string a_assembly)
+		public bool DoesActionRequireAuthorisation()
 		{
-			string controller = Controller;
+			return DoesActionRequireAuthorisation(Assembly.GetCallingAssembly());
+		}
+
+		/// <summary>
+		/// Tests whether the route action requires authorization to be invoked, i.e. it is 
+		/// decorated with the AuthorizeAttribute
+		/// </summary>
+		/// <param name="callingAssembly">The calling assembly that contains the controller class</param>
+		/// <returns>true if the action requires authorisation, false otherwise</returns>
+		public bool DoesActionRequireAuthorisation(Assembly callingAssembly)
+		{
+			string controller = Controller + "Controller";
 			string action = Action;
 
-			controller = String.Format("{0}.{1}Controller, {2}", a_namespace, controller, a_assembly);
 			try
 			{
-				Type tc = Type.GetType(controller);
+				Type tc = callingAssembly.GetTypes().FirstOrDefault(t => t.Name == controller);
 				if (null != tc)
 				{
 					MethodInfo mi = tc.GetMethod(action);
