@@ -2,7 +2,7 @@
 using System.Web.Routing;
 using System.Web.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Triggerfish.Testing.Web.Mvc;
+using Triggerfish.Web.Mvc.Testing;
 using Triggerfish.Web.Routing;
 
 namespace Triggerfish.Web.Tests
@@ -11,43 +11,43 @@ namespace Triggerfish.Web.Tests
 	public class FriendlyUrlRouteTests
 	{
 		[TestMethod]
-		public void ShouldGenerateOutboundUrl1()
+		public void ShouldGenerateOutboundUrlFromRouteContainingSpaces()
 		{
 			FriendlyUrlRoute route = new FriendlyUrlRoute("{controller}/{action}", new MvcRouteHandler());
 
 			RouteValueDictionary values = new RouteValueDictionary(new { controller = "The Controller", action = "The Action" });
 
-			MvcAssert.IsOutboundRouteCorrect("the-controller/the-action", values, route);
+			MvcAssert.IsOutboundRouteValid("the-controller/the-action", values, route);
 		}
 
 		[TestMethod]
-		public void ShouldGenerateOutboundUrl2()
+		public void ShouldGenerateOutboundUrlFromRouteWithArgument()
 		{
 			FriendlyUrlRoute route = new FriendlyUrlRoute("artists/{genre}", new RouteValueDictionary(new { controller = "Artists", action = "List" }), new MvcRouteHandler());
 
 			RouteValueDictionary values = new RouteValueDictionary(new { controller = "Artists", action = "List", genre = "Pop" });
 
-			MvcAssert.IsOutboundRouteCorrect("artists/pop", values, route);
+			MvcAssert.IsOutboundRouteValid("artists/pop", values, route);
 		}
 
 		[TestMethod]
-		public void ShouldGenerateInboundRoute1()
+		public void ShouldGenerateInboundRouteFromStandardRoute()
 		{
 			FriendlyUrlRoute route = new FriendlyUrlRoute("{controller}/{action}", new MvcRouteHandler());
 
-			RouteValueDictionary values = new RouteValueDictionary(new { controller = "Controller", action = "Action" });
+			RouteValueDictionary values = new RouteValueDictionary(new { controller = "controller", action = "action" }); 
 
-			MvcAssert.IsInboundRouteCorrect(values, "~/controller/action", route);
+			MvcAssert.IsInboundRouteValid(values, "~/controller/action", route);
 		}
 
 		[TestMethod]
-		public void ShouldGenerateInboundRoute2()
+		public void ShouldGenerateInboundRouteFromRouteWithArgument()
 		{
 			FriendlyUrlRoute route = new FriendlyUrlRoute("artists/{genre}", new RouteValueDictionary(new { controller = "Artists", action = "List" }), new MvcRouteHandler());
 
 			RouteValueDictionary values = new RouteValueDictionary(new { controller = "Artists", action = "List", genre = "pop" });
 
-			MvcAssert.IsInboundRouteCorrect(values, "~/artists/pop", route);
+			MvcAssert.IsInboundRouteValid(values, "~/artists/pop", route);
 		}
 	}
 }

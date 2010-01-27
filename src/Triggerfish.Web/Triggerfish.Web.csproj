@@ -54,7 +54,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Routing\UrlExtensions.cs" />
+    <Compile Include="Mvc\PageLinkExtensions.cs" />
+    <Compile Include="Mvc\FirstPrevNextLastPageLinkHtmlGenerator.cs" />
+    <Compile Include="Mvc\HtmlHelpers.cs" />
+    <Compile Include="Mvc\PageLinkHtmlGenerator.cs" />
+    <Compile Include="Mvc\PageLinkCentredAlgorithm.cs" />
+    <Compile Include="Mvc\PageLink.cs" />
+    <Compile Include="Mvc\PagedList.cs" />
+    <Compile Include="Mvc\ExportModelStateAttribute.cs" />
+    <Compile Include="Mvc\ExportModelAttribute.cs" />
+    <Compile Include="Mvc\ExportToTempDataAttribute.cs" />
+    <Compile Include="Mvc\ImportFromTempDataAttribute.cs" />
+    <Compile Include="Mvc\ImportModelAttribute.cs" />
+    <Compile Include="Mvc\ImportModelStateAttribute.cs" />
+    <Compile Include="Mvc\PageLinksAlgorithm.cs" />
+    <Compile Include="Mvc\PageUrlGenerator.cs" />
+    <Compile Include="Mvc\TempDataAttribute.cs" />
+    <Compile Include="Routing\RouteValueDictionaryExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Routing\FriendlyUrlRoute.cs" />
     <Compile Include="Mvc\RouteExtensions.cs" />
@@ -62,6 +78,7 @@
     <Compile Include="Mvc\RouteConstraintAttribute.cs" />
     <Compile Include="Mvc\RouteDefaultAttribute.cs" />
     <Compile Include="Mvc\RouteParser.cs" />
+    <Compile Include="StringExtensions.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -71,4 +88,7 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <PropertyGroup>
+    <PostBuildEvent>copy $(TargetDir)$(TargetName).* $(SolutionDir)$(OutDir)</PostBuildEvent>
+  </PropertyGroup>
 </Project>

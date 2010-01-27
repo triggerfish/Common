@@ -5,8 +5,9 @@ using System.Text;
 using System.Web;
 using System.Web.Routing;
 using Moq;
+using Triggerfish.Web.Testing;
 
-namespace Triggerfish.Testing.Web.Mvc
+namespace Triggerfish.Web.Mvc.Testing
 {
 	/// <summary>
 	/// Static helper methods to create inbound urls using the MVC framework

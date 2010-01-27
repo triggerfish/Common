@@ -57,11 +57,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Mvc\FirstPrevNextLastPageLinkHtmlGeneratorTests.cs" />
+    <Compile Include="Mvc\HtmlHelperTests.cs" />
+    <Compile Include="Mvc\PageLinkCentredAlgorithmTests.cs" />
+    <Compile Include="Mvc\PagedListTests.cs" />
+    <Compile Include="Mvc\ImportFromTempDataAttributeTests.cs" />
+    <Compile Include="Mvc\ExportToTempDataAttributeTests.cs" />
+    <Compile Include="Mvc\MockController.cs" />
     <Compile Include="Mvc\RouteExtensionsTests.cs" />
     <Compile Include="Mvc\RouteParserTests.cs" />
+    <Compile Include="Mvc\TempDataAttributeTests.cs" />
     <Compile Include="Routing\FriendlyUrlRouteTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Routing\UrlExtensionsTests.cs" />
+    <Compile Include="Routing\RouteValueDictionaryExtensionsTests.cs" />
+    <Compile Include="StringExtensionsTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Triggerfish.Testing\Triggerfish.Testing.csproj">

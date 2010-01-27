@@ -60,12 +60,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Web\Mvc\RouteInformationExtensions.cs" />
     <Compile Include="Web\Mvc\MvcAsserts.cs" />
     <Compile Include="Web\Mvc\OutboundRoutingHelpers.cs" />
     <Compile Include="Web\Mvc\InboundRoutingHelpers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Web\HttpHelpers.cs" />
     <Compile Include="Web\Mvc\RouteInformation.cs" />
+    <Compile Include="Web\Mvc\UrlHelpers.cs" />
     <Compile Include="Web\Routing\RoutingAsserts.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
@@ -76,4 +78,7 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <PropertyGroup>
+    <PostBuildEvent>copy $(TargetDir)$(TargetName).* $(SolutionDir)$(OutDir)</PostBuildEvent>
+  </PropertyGroup>
 </Project>

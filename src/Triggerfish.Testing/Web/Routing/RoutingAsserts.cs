@@ -5,7 +5,7 @@ using System.Text;
 using System.Web.Routing;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Triggerfish.Testing.Web.Routing
+namespace Triggerfish.Web.Routing.Testing
 {
 	/// <summary>
 	/// Assert methods for use in unit test projects
@@ -28,7 +28,7 @@ namespace Triggerfish.Testing.Web.Routing
 			foreach (var kvp in a_expected)
 			{
 				Assert.IsTrue(a_actual.ContainsKey(kvp.Key));
-				Assert.AreEqual(kvp.Value, a_actual[kvp.Key]);
+					Assert.AreEqual(kvp.Value, a_actual[kvp.Key]);
 			}
 		}
 	}

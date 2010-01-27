@@ -6,8 +6,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
-using Triggerfish.Testing.Web.Mvc;
-using Triggerfish.Testing.Web.Routing;
+using Triggerfish.Web.Mvc.Testing;
+using Triggerfish.Web.Routing.Testing;
 
 namespace Triggerfish.Testing.Tests
 {
@@ -79,15 +79,7 @@ namespace Triggerfish.Testing.Tests
 		{
 			RouteInformation ri = new RouteInformation("/Artists", RegisterRoutes);
 
-			Assert.IsTrue(ri.DoesActionRequireAuthorisation("Triggerfish.Testing.Tests.WithAuthorise", "Triggerfish.Testing.Tests"));
-		}
-
-		[TestMethod]
-		public void ShouldNotGetAuthoriseRequired()
-		{
-			RouteInformation ri = new RouteInformation("/Artists", RegisterRoutes);
-
-			Assert.IsFalse(ri.DoesActionRequireAuthorisation("Triggerfish.Testing.Tests.WithoutAuthorise", "Triggerfish.Testing.Tests"));
+			Assert.IsTrue(ri.DoesActionRequireAuthorisation());
 		}
 
 		private static void RegisterRoutes(RouteCollection a_routes)
@@ -100,26 +92,12 @@ namespace Triggerfish.Testing.Tests
 		}
 	}
 
-	namespace WithAuthorise
+	public class ArtistsController : Controller
 	{
-		public class ArtistsController : Controller
+		[Authorize()]
+		public ActionResult List(string genre)
 		{
-			[Authorize()]
-			public ActionResult List(string genre)
-			{
-				return null;
-			}
-		}
-	}
-
-	namespace WithoutAuthorise
-	{
-		public class ArtistsController : Controller
-		{
-			public ActionResult List(string genre)
-			{
-				return null;
-			}
+			return null;
 		}
 	}
 }

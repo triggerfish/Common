@@ -4,7 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Triggerfish.Web.Mvc;
 using System.Web.Routing;
-using Triggerfish.Testing.Web.Routing;
+using Triggerfish.Web.Routing.Testing;
 
 namespace Triggerfish.Web.Tests
 {

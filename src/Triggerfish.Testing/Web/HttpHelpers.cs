@@ -6,7 +6,7 @@ using System.Web;
 using System.Web.Routing;
 using Moq;
 
-namespace Triggerfish.Testing.Web
+namespace Triggerfish.Web.Testing
 {
 	/// <summary>
 	/// Helpers for mocking http objects
