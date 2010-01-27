@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Triggerfish.Web.Tests")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Triggerfish")]
-[assembly: AssemblyProduct("Triggerfish.Web")]
-[assembly: AssemblyCopyright("Copyright © Triggerfish Limited 2009")]
+[assembly: AssemblyCompany("Triggerfish Limited")]
+[assembly: AssemblyProduct("Triggerfish.Web.Tests")]
+[assembly: AssemblyCopyright("Copyright © Triggerfish Limited 2010")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -32,5 +32,5 @@ using System.Runtime.InteropServices;
 //
 // You can specify all the values or you can default the Revision and Build Numbers 
 // by using the '*' as shown below:
-[assembly: AssemblyVersion("0.1.0")]
-[assembly: AssemblyFileVersion("0.1.0")]
+[assembly: AssemblyVersion("0.1.2")]
+[assembly: AssemblyFileVersion("0.1.2")]
