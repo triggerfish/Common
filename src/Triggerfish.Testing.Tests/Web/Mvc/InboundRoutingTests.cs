@@ -6,7 +6,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
-using Triggerfish.Testing.Web.Mvc;
+using Triggerfish.Web.Mvc.Testing;
 
 namespace Triggerfish.Testing.Tests
 {
@@ -21,7 +21,7 @@ namespace Triggerfish.Testing.Tests
 				action = "Login"
 			});
 
-			MvcAssert.IsInboundRouteCorrect(expected, "~/Account/Login", RegisterRoutes);
+			MvcAssert.IsInboundRouteValid(expected, "~/Account/Login", RegisterRoutes);
 		}
 
 		[TestMethod]
@@ -33,7 +33,7 @@ namespace Triggerfish.Testing.Tests
 				action = "Index"
 			});
 
-			MvcAssert.IsInboundRouteCorrect(expected, "~/Account", RegisterRoutes);
+			MvcAssert.IsInboundRouteValid(expected, "~/Account", RegisterRoutes);
 		}
 
 		[TestMethod]
@@ -46,7 +46,7 @@ namespace Triggerfish.Testing.Tests
 				genre = "All"
 			});
 
-			MvcAssert.IsInboundRouteCorrect(expected, "~/Artists", RegisterRoutes);
+			MvcAssert.IsInboundRouteValid(expected, "~/Artists", RegisterRoutes);
 		}
 
 		[TestMethod]
@@ -59,7 +59,7 @@ namespace Triggerfish.Testing.Tests
 				genre = "Pop"
 			});
 
-			MvcAssert.IsInboundRouteCorrect(expected, "~/Artists/Pop", RegisterRoutes);
+			MvcAssert.IsInboundRouteValid(expected, "~/Artists/Pop", RegisterRoutes);
 		}
 
 		[TestMethod]
@@ -74,7 +74,7 @@ namespace Triggerfish.Testing.Tests
 
 			try
 			{
-				MvcAssert.IsInboundRouteCorrect(expected, "~/Account/Login/12", RegisterRoutes);
+				MvcAssert.IsInboundRouteValid(expected, "~/Account/Login/12", RegisterRoutes);
 			}
 			catch (Exception)
 			{
@@ -94,7 +94,7 @@ namespace Triggerfish.Testing.Tests
 				action = "Login"
 			});
 
-			MvcAssert.IsInboundRouteCorrect(expected, "~/Account/Login", route);
+			MvcAssert.IsInboundRouteValid(expected, "~/Account/Login", route);
 		}
 
 		[TestMethod]
@@ -107,7 +107,7 @@ namespace Triggerfish.Testing.Tests
 				action = "Login"
 			});
 
-			MvcAssert.IsInboundRouteCorrect(expected, "~/plibble/Login", route);
+			MvcAssert.IsInboundRouteValid(expected, "~/plibble/Login", route);
 		}
 
 		[TestMethod]
@@ -123,7 +123,7 @@ namespace Triggerfish.Testing.Tests
 
 			try
 			{
-				MvcAssert.IsInboundRouteCorrect(expected, "~/Account/Login/12", route);
+				MvcAssert.IsInboundRouteValid(expected, "~/Account/Login/12", route);
 			}
 			catch (Exception)
 			{

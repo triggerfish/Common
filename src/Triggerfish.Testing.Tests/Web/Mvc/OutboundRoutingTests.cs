@@ -6,7 +6,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
-using Triggerfish.Testing.Web.Mvc;
+using Triggerfish.Web.Mvc.Testing;
 
 namespace Triggerfish.Testing.Tests
 {
@@ -20,7 +20,7 @@ namespace Triggerfish.Testing.Tests
 				controller = "Artists",
 				action = "List"
 			});
-			MvcAssert.IsOutboundRouteCorrect("/Artists", route, RegisterRoutes);
+			MvcAssert.IsOutboundRouteValid("/Artists", route, RegisterRoutes);
 		}
 
 		[TestMethod]
@@ -31,7 +31,7 @@ namespace Triggerfish.Testing.Tests
 				action = "List",
 				genre = "Pop"
 			});
-			MvcAssert.IsOutboundRouteCorrect("/Artists/Pop", route, RegisterRoutes);
+			MvcAssert.IsOutboundRouteValid("/Artists/Pop", route, RegisterRoutes);
 		}
 
 		[TestMethod]
@@ -41,7 +41,7 @@ namespace Triggerfish.Testing.Tests
 				controller = "Account",
 				action = "Login"
 			});
-			MvcAssert.IsOutboundRouteCorrect("/Account/Login", route, RegisterRoutes);
+			MvcAssert.IsOutboundRouteValid("/Account/Login", route, RegisterRoutes);
 		}
 
 		[TestMethod]
@@ -50,7 +50,7 @@ namespace Triggerfish.Testing.Tests
 			RouteValueDictionary route = new RouteValueDictionary(new {
 				controller = "Account"
 			});
-			MvcAssert.IsOutboundRouteCorrect("/Account", route, RegisterRoutes);
+			MvcAssert.IsOutboundRouteValid("/Account", route, RegisterRoutes);
 		}
 
 		[TestMethod]
@@ -63,7 +63,7 @@ namespace Triggerfish.Testing.Tests
 				action = "Login"
 			});
 
-			MvcAssert.IsOutboundRouteCorrect("Account/Login", values, route);
+			MvcAssert.IsOutboundRouteValid("Account/Login", values, route);
 		}
 
 		[TestMethod]
@@ -76,7 +76,7 @@ namespace Triggerfish.Testing.Tests
 				action = "Login"
 			});
 
-			MvcAssert.IsOutboundRouteCorrect("plibble/Login", values, route);
+			MvcAssert.IsOutboundRouteValid("plibble/Login", values, route);
 		}
 
 		private static void RegisterRoutes(RouteCollection a_routes)

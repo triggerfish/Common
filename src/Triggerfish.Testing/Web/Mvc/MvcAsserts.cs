@@ -5,9 +5,9 @@ using System.Text;
 using System.Web.Routing;
 using System.Web;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Triggerfish.Testing.Web.Routing;
+using Triggerfish.Web.Routing.Testing;
 
-namespace Triggerfish.Testing.Web.Mvc
+namespace Triggerfish.Web.Mvc.Testing
 {
 	/// <summary>
 	/// Asserts for use in unit testing code
@@ -20,9 +20,9 @@ namespace Triggerfish.Testing.Web.Mvc
 		/// <param name="a_expectedRouteValues">The expected route values</param>
 		/// <param name="a_actualUrl">The actual url from which the route values are generated</param>
 		/// <param name="a_actualRoute">The actual route from which the route values are generated</param>
-		public static void IsInboundRouteCorrect(object a_expectedRouteValues, string a_actualUrl, Route a_actualRoute)
+		public static void IsInboundRouteValid(object a_expectedRouteValues, string a_actualUrl, Route a_actualRoute)
 		{
-			IsInboundRouteCorrect(new RouteValueDictionary(a_expectedRouteValues), a_actualUrl, a_actualRoute);
+			IsInboundRouteValid(new RouteValueDictionary(a_expectedRouteValues), a_actualUrl, a_actualRoute);
 		}
 
 		/// <summary>
@@ -31,7 +31,7 @@ namespace Triggerfish.Testing.Web.Mvc
 		/// <param name="a_expectedRouteValues">The expected route values</param>
 		/// <param name="a_actualUrl">The actual url from which the route values are generated</param>
 		/// <param name="a_actualRoute">The actual route from which the route values are generated</param>
-		public static void IsInboundRouteCorrect(RouteValueDictionary a_expectedRouteValues, string a_actualUrl, Route a_actualRoute)
+		public static void IsInboundRouteValid(RouteValueDictionary a_expectedRouteValues, string a_actualUrl, Route a_actualRoute)
 		{
 			RoutingAssert.AreDictionariesEqual(a_expectedRouteValues, InboundRoutingHelpers.GenerateInboundRoute(a_actualUrl, a_actualRoute));
 		}
@@ -42,9 +42,9 @@ namespace Triggerfish.Testing.Web.Mvc
 		/// <param name="a_expectedRouteValues">The expected route values</param>
 		/// <param name="a_actualUrl">The actual url from which the route values are generated</param>
 		/// <param name="a_registerRoutes">Delegate to register all possible routes</param>
-		public static void IsInboundRouteCorrect(object a_expectedRouteValues, string a_actualUrl, Action<RouteCollection> a_registerRoutes)
+		public static void IsInboundRouteValid(object a_expectedRouteValues, string a_actualUrl, Action<RouteCollection> a_registerRoutes)
 		{
-			IsInboundRouteCorrect(new RouteValueDictionary(a_expectedRouteValues), a_actualUrl, a_registerRoutes);
+			IsInboundRouteValid(new RouteValueDictionary(a_expectedRouteValues), a_actualUrl, a_registerRoutes);
 		}
 
 		/// <summary>
@@ -53,7 +53,7 @@ namespace Triggerfish.Testing.Web.Mvc
 		/// <param name="a_expectedRouteValues">The expected route values</param>
 		/// <param name="a_actualUrl">The actual url from which the route values are generated</param>
 		/// <param name="a_registerRoutes">Delegate to register all possible routes</param>
-		public static void IsInboundRouteCorrect(RouteValueDictionary a_expectedRouteValues, string a_actualUrl, Action<RouteCollection> a_registerRoutes)
+		public static void IsInboundRouteValid(RouteValueDictionary a_expectedRouteValues, string a_actualUrl, Action<RouteCollection> a_registerRoutes)
 		{
 			RoutingAssert.AreDictionariesEqual(a_expectedRouteValues, InboundRoutingHelpers.GenerateInboundRoute(a_actualUrl, a_registerRoutes));
 		}
@@ -64,9 +64,9 @@ namespace Triggerfish.Testing.Web.Mvc
 		/// <param name="a_expectedUrl">The expected url</param>
 		/// <param name="a_actualRouteValues">The actual route values from which the url is generated</param>
 		/// <param name="a_actualRoute">The actual route from which the url is generated</param>
-		public static void IsOutboundRouteCorrect(string a_expectedUrl, object a_actualRouteValues, Route a_actualRoute)
+		public static void IsOutboundRouteValid(string a_expectedUrl, object a_actualRouteValues, Route a_actualRoute)
 		{
-			IsOutboundRouteCorrect(a_expectedUrl, new RouteValueDictionary(a_actualRouteValues), a_actualRoute);
+			IsOutboundRouteValid(a_expectedUrl, new RouteValueDictionary(a_actualRouteValues), a_actualRoute);
 		}
 
 		/// <summary>
@@ -75,7 +75,7 @@ namespace Triggerfish.Testing.Web.Mvc
 		/// <param name="a_expectedUrl">The expected url</param>
 		/// <param name="a_actualRouteValues">The actual route values from which the url is generated</param>
 		/// <param name="a_actualRoute">The actual route from which the url is generated</param>
-		public static void IsOutboundRouteCorrect(string a_expectedUrl, RouteValueDictionary a_actualRouteValues, Route a_actualRoute)
+		public static void IsOutboundRouteValid(string a_expectedUrl, RouteValueDictionary a_actualRouteValues, Route a_actualRoute)
 		{
 			Assert.AreEqual(a_expectedUrl, OutboundRoutingHelpers.GenerateOutboundUrl(a_actualRouteValues, a_actualRoute));
 		}
@@ -87,9 +87,9 @@ namespace Triggerfish.Testing.Web.Mvc
 		/// <param name="a_expectedUrl">The expected url</param>
 		/// <param name="a_actualRouteValues">The actual route values from which the url is generated</param>
 		/// <param name="a_registerRoutes">Delegate to register all possible routes</param>
-		public static void IsOutboundRouteCorrect(string a_expectedUrl, object a_actualRouteValues, Action<RouteCollection> a_registerRoutes)
+		public static void IsOutboundRouteValid(string a_expectedUrl, object a_actualRouteValues, Action<RouteCollection> a_registerRoutes)
 		{
-			IsOutboundRouteCorrect(a_expectedUrl, new RouteValueDictionary(a_actualRouteValues), a_registerRoutes);
+			IsOutboundRouteValid(a_expectedUrl, new RouteValueDictionary(a_actualRouteValues), a_registerRoutes);
 		}
 
 		/// <summary>
@@ -99,7 +99,7 @@ namespace Triggerfish.Testing.Web.Mvc
 		/// <param name="a_expectedUrl">The expected url</param>
 		/// <param name="a_actualRouteValues">The actual route values from which the url is generated</param>
 		/// <param name="a_registerRoutes">Delegate to register all possible routes</param>
-		public static void IsOutboundRouteCorrect(string a_expectedUrl, RouteValueDictionary a_actualRouteValues, Action<RouteCollection> a_registerRoutes)
+		public static void IsOutboundRouteValid(string a_expectedUrl, RouteValueDictionary a_actualRouteValues, Action<RouteCollection> a_registerRoutes)
 		{
 			Assert.AreEqual(a_expectedUrl, OutboundRoutingHelpers.GenerateOutboundUrl(a_actualRouteValues, a_registerRoutes));
 		}
