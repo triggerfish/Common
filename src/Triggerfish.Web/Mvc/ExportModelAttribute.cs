@@ -19,22 +19,22 @@ namespace Triggerfish.Web.Mvc
 		/// <summary>
 		/// Constuctor
 		/// </summary>
-		/// <param name="a_key">The key with which to store data in TempData</param>
-		/// <param name="a_modelType">The type of data object in ViewData.Model</param>
-		public ExportModelAttribute(string a_key, Type a_modelType)
-			: base(a_key, EExportWhen.ModelStateValid)
+		/// <param name="key">The key with which to store data in TempData</param>
+		/// <param name="modelType">The type of data object in ViewData.Model</param>
+		public ExportModelAttribute(string key, Type modelType)
+			: base(key, EExportWhen.ModelStateValid)
 		{
-			ModelType = a_modelType;
+			ModelType = modelType;
 		}
 
 		/// <summary>
 		/// Abstract method implementation to get the object in ViewData.Model
 		/// </summary>
-		/// <param name="a_controller">The controller object</param>
+		/// <param name="controller">The controller object</param>
 		/// <returns>The ViewData.Model object</returns>
-		protected override object GetModel(ControllerBase a_controller)
+		protected override object GetModel(ControllerBase controller)
 		{
-			object model = a_controller.ViewData.Model;
+			object model = controller.ViewData.Model;
 			if (null != model && model.GetType() == ModelType)
 			{
 				return model;

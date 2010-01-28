@@ -14,17 +14,17 @@ namespace Triggerfish.Web.Mvc
 		/// <summary>
 		/// Constuctor
 		/// </summary>
-		/// <param name="a_key">The key with which to store data in TempData</param>
-		public ExportModelStateAttribute(string a_key) : base(a_key, EExportWhen.ModelStateInvalid) { }
+		/// <param name="key">The key with which to store data in TempData</param>
+		public ExportModelStateAttribute(string key) : base(key, EExportWhen.ModelStateInvalid) { }
 
 		/// <summary>
 		/// Abstract method implementation to get the object in ViewData.ModelState
 		/// </summary>
-		/// <param name="a_controller">The controller object</param>
+		/// <param name="controller">The controller object</param>
 		/// <returns>The ViewData.ModelState object</returns>
-		protected override object GetModel(ControllerBase a_controller)
+		protected override object GetModel(ControllerBase controller)
 		{
-			return a_controller.ViewData.ModelState;
+			return controller.ViewData.ModelState;
 		}
 	}
 }

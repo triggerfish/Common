@@ -82,9 +82,9 @@ namespace Triggerfish.Testing.Tests
 			Assert.IsTrue(ri.DoesActionRequireAuthorisation());
 		}
 
-		private static void RegisterRoutes(RouteCollection a_routes)
+		private static void RegisterRoutes(RouteCollection routes)
 		{
-			a_routes.MapRoute(
+			routes.MapRoute(
 				null,
 				"Artists/{genre}",
 				new { controller = "Artists", Action = "List", genre = "All" }

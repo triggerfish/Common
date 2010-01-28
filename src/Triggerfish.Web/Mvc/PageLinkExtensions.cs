@@ -14,24 +14,24 @@ namespace Triggerfish.Web.Mvc
 		/// <summary>
 		/// Create an HTML anchor tag
 		/// </summary>
-		/// <param name="a_page">The page link object to which the anchor applies</param>
-		/// <param name="a_cssClass">The CSS class style to apply</param>
-		/// <param name="a_href">The link</param>
+		/// <param name="page">The page link object to which the anchor applies</param>
+		/// <param name="cssClass">The CSS class style to apply</param>
+		/// <param name="href">The link</param>
 		/// <returns>The HTML string</returns>
-		public static string ToAnchor(this PageLink a_page, string a_cssClass, string a_href)
+		public static string ToAnchor(this PageLink page, string cssClass, string href)
 		{
-			return HtmlHelpers.CreateAnchor(a_cssClass, a_href, a_page.Number);
+			return HtmlHelpers.CreateAnchor(cssClass, href, page.Number);
 		}
 
 		/// <summary>
 		/// Create an HTML span tag
 		/// </summary>
-		/// <param name="a_page">The page link object to which the span applies</param>
-		/// <param name="a_cssClass">The CSS class style to apply</param>
+		/// <param name="page">The page link object to which the span applies</param>
+		/// <param name="cssClass">The CSS class style to apply</param>
 		/// <returns></returns>
-		public static string ToSpan(this PageLink a_page, string a_cssClass)
+		public static string ToSpan(this PageLink page, string cssClass)
 		{
-			return HtmlHelpers.CreateSpan(a_cssClass, a_page.Number);
+			return HtmlHelpers.CreateSpan(cssClass, page.Number);
 		}
 	}
 }

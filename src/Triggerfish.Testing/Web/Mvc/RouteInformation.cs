@@ -45,28 +45,28 @@ namespace Triggerfish.Web.Mvc.Testing
 		/// <summary>
 		/// Static creation method
 		/// </summary>
-		/// <param name="a_relativeUrl">The relative url for which to get the route information</param>
-		/// <param name="a_registerRoutes">Delegate instance to register routes</param>
+		/// <param name="relativeUrl">The relative url for which to get the route information</param>
+		/// <param name="registerRoutes">Delegate instance to register routes</param>
 		/// <returns>A new RouteInformation object for the url</returns>
-		public static RouteInformation Create(string a_relativeUrl, Action<RouteCollection> a_registerRoutes)
+		public static RouteInformation Create(string relativeUrl, Action<RouteCollection> registerRoutes)
 		{
-			return new RouteInformation(a_relativeUrl, a_registerRoutes);
+			return new RouteInformation(relativeUrl, registerRoutes);
 		}
 
 		/// <summary>
 		/// Constructor
 		/// </summary>
-		/// <param name="a_relativeUrl">The relative url for which to get the route information</param>
-		/// <param name="a_registerRoutes">Delegate instance to register routes</param>
-		public RouteInformation(string a_relativeUrl, Action<RouteCollection> a_registerRoutes)
+		/// <param name="relativeUrl">The relative url for which to get the route information</param>
+		/// <param name="registerRoutes">Delegate instance to register routes</param>
+		public RouteInformation(string relativeUrl, Action<RouteCollection> registerRoutes)
 		{
-			if (String.IsNullOrEmpty(a_relativeUrl))
+			if (String.IsNullOrEmpty(relativeUrl))
 				return;
 
-			Url = a_relativeUrl;
+			Url = relativeUrl;
 
 			// make sure the url conforms to expected relative format
-			string url = a_relativeUrl;
+			string url = relativeUrl;
 			if (0 != url.IndexOf("~/"))
 			{
 				if (url[0] != '/')
@@ -82,7 +82,7 @@ namespace Triggerfish.Web.Mvc.Testing
 			RouteCollection routes = new RouteCollection();
 			try
 			{
-				RouteValues = InboundRoutingHelpers.GenerateInboundRoute(url, a_registerRoutes);
+				RouteValues = InboundRoutingHelpers.GenerateInboundRoute(url, registerRoutes);
 			}
 			catch (Exception)
 			{
@@ -134,23 +134,23 @@ namespace Triggerfish.Web.Mvc.Testing
 		/// <summary>
 		/// Tests whether or not the action method is on the specified controller class
 		/// </summary>
-		/// <param name="a_controller">The name of the controller</param>
+		/// <param name="controller">The name of the controller</param>
 		/// <returns>true if the action method is in the controller class, false otherwise</returns>
-		public bool IsActionOnController(string a_controller)
+		public bool IsActionOnController(string controller)
 		{
-			int i = a_controller.IndexOf("Controller");
+			int i = controller.IndexOf("Controller");
 			if (i != -1)
 			{
-				a_controller = a_controller.Substring(0, i);
+				controller = controller.Substring(0, i);
 			}
-			return 0 == String.Compare(a_controller, Controller, false);
+			return 0 == String.Compare(controller, Controller, false);
 		}
 
-		private string GetRouteValue(string a_key)
+		private string GetRouteValue(string key)
 		{
 			if (RouteValues != null)
 			{
-				return (string)RouteValues[a_key];
+				return (string)RouteValues[key];
 			}
 			return null;
 		}

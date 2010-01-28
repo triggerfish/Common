@@ -55,9 +55,9 @@ namespace Triggerfish.Web.Tests
 
 		public MockImportAttribute(string key, Type type) : base(key, type) { }
 
-		protected override void SetModel(object a_model, ControllerBase a_controller)
+		protected override void SetModel(object model, ControllerBase controller)
 		{
-			Model = a_model;
+			Model = model;
 		}
 	}
 }

@@ -83,7 +83,7 @@ namespace Triggerfish.Web.Tests
 	{
 		public MockExportAttribute(string key, EExportWhen when) : base(key, when) { }
 
-		protected override object GetModel(ControllerBase a_controller)
+		protected override object GetModel(ControllerBase controller)
 		{
 			return "DataValue";
 		}

@@ -19,10 +19,10 @@ namespace Triggerfish.Web.Mvc
 		/// <summary>
 		/// Constructor
 		/// </summary>
-		/// <param name="a_key">The TempData key</param>
-		protected TempDataAttribute(string a_key)
+		/// <param name="key">The TempData key</param>
+		protected TempDataAttribute(string key)
 		{
-			Key = a_key;
+			Key = key;
 		}
 
 		/// <summary>
@@ -42,10 +42,10 @@ namespace Triggerfish.Web.Mvc
 		/// Sets the data object into TempData
 		/// </summary>
 		/// <param name="filterContext">The context object that contains a reference to TempData</param>
-		/// <param name="a_object">The object to set</param>
-		public void Set(ControllerContext filterContext, object a_object)
+		/// <param name="obj">The object to set</param>
+		public void Set(ControllerContext filterContext, object obj)
 		{
-			filterContext.Controller.TempData[Key] = a_object;
+			filterContext.Controller.TempData[Key] = obj;
 		}
 	
 		/// <summary>

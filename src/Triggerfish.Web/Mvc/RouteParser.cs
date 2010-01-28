@@ -150,14 +150,14 @@ namespace Triggerfish.Web.Mvc
 		/// <summary>
 		/// Constructs a route parser
 		/// </summary>
-		/// <param name="a_controller">The type of the controller class</param>
-		/// <param name="a_action">The action method on the controller</param>
-		/// <param name="a_route">The route attribute applied to the action method</param>
-		public RouteParser(Type a_controller, MethodInfo a_action, RouteAttribute a_route)
+		/// <param name="controller">The type of the controller class</param>
+		/// <param name="action">The action method on the controller</param>
+		/// <param name="route">The route attribute applied to the action method</param>
+		public RouteParser(Type controller, MethodInfo action, RouteAttribute route)
 		{
-			m_controller = a_controller;
-			m_action = a_action;
-			m_routeAttribute = a_route;
+			m_controller = controller;
+			m_action = action;
+			m_routeAttribute = route;
 
 			string controllerName = m_controller.Name;
 
@@ -178,13 +178,13 @@ namespace Triggerfish.Web.Mvc
 		/// in the specified assembly. RouteParser objects are only created where a controller method 
 		/// is decorated with a RouteAttribute
 		/// </summary>
-		/// <param name="a_assembly">The assembly to scan</param>
+		/// <param name="assembly">The assembly to scan</param>
 		/// <returns>List of RouteParser objects</returns>
-		public static List<RouteParser> CreateFromAttributes(Assembly a_assembly)
+		public static List<RouteParser> CreateFromAttributes(Assembly assembly)
 		{
 			List<RouteParser> parsers = new List<RouteParser>();
 			IEnumerable<Type> controllerClasses =
-				from t in a_assembly.GetTypes()
+				from t in assembly.GetTypes()
 				where t.IsClass && t.IsSubclassOf(typeof(System.Web.Mvc.Controller))
 				select t;
 

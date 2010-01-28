@@ -35,12 +35,12 @@ namespace Triggerfish.Web.Mvc
 		/// <summary>
 		/// Constructor
 		/// </summary>
-		/// <param name="a_key">The key with which to store data in TempData</param>
-		/// <param name="a_when">The EExportWhen value</param>
-		protected ExportToTempDataAttribute(string a_key, EExportWhen a_when)
-			: base(a_key)
+		/// <param name="key">The key with which to store data in TempData</param>
+		/// <param name="when">The EExportWhen value</param>
+		protected ExportToTempDataAttribute(string key, EExportWhen when)
+			: base(key)
 		{
-			ExportWhen = a_when;
+			ExportWhen = when;
 		}
 
 		/// <summary>
@@ -64,8 +64,8 @@ namespace Triggerfish.Web.Mvc
 		/// <summary>
 		/// Abstract method to get the actual data object from the Controller object
 		/// </summary>
-		/// <param name="a_controller">The controller object</param>
+		/// <param name="controller">The controller object</param>
 		/// <returns>The object to export to TempData</returns>
-		protected abstract object GetModel(ControllerBase a_controller);
+		protected abstract object GetModel(ControllerBase controller);
 	}
 }

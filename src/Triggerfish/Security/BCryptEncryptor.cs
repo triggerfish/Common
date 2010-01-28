@@ -2,19 +2,22 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Triggerfish.Authentication
+namespace Triggerfish.Security
 {
 	/// <summary>
-	/// Interface to encrypt a string
+	/// Encrypter interface implementation using the BCrypt algorithm
 	/// </summary>
-	public interface IEncryptor
+	public sealed class BCryptEncryptor : IEncryptor
 	{
 		/// <summary>
 		/// Encrypt the plaintext string
 		/// </summary>
 		/// <param name="plainText">The plaintext string</param>
 		/// <returns>The encryted string</returns>
-		string Encrypt(string plainText);
+		public string Encrypt(string plainText)
+		{
+			return BCrypt.HashPassword(plainText, BCrypt.GenerateSalt());
+		}
 
 		/// <summary>
 		/// Tests whether the plaintext string is equal to a text
@@ -23,6 +26,9 @@ namespace Triggerfish.Authentication
 		/// <param name="plainText">The plaintext</param>
 		/// <param name="encryptedText">The encrypted text</param>
 		/// <returns>True if the strings match, false otherwise</returns>
-		bool IsMatch(string plainText, string encryptedText);
+		public bool IsMatch(string plainText, string encryptedText)
+		{
+			return BCrypt.CheckPassword(plainText, encryptedText);
+		}
 	}
 }

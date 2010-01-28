@@ -79,15 +79,15 @@ namespace Triggerfish.Testing.Tests
 			MvcAssert.IsOutboundRouteValid("plibble/Login", values, route);
 		}
 
-		private static void RegisterRoutes(RouteCollection a_routes)
+		private static void RegisterRoutes(RouteCollection routes)
 		{
-			a_routes.MapRoute(
+			routes.MapRoute(
 				null,
 				"Artists/{genre}",
 				new { controller = "Artists", Action = "List", genre = "All" }
 			);
 		
-			a_routes.MapRoute(
+			routes.MapRoute(
 				null,
 				"{controller}/{action}",
 				new { controller = "Home", action = "Index" }

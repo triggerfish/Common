@@ -17,13 +17,13 @@ namespace Triggerfish.Web.Mvc.Testing
 		/// <summary>
 		/// Create inbound route values from a string url. 
 		/// </summary>
-		/// <param name="a_url">The url from which to generate the route</param>
-		/// <param name="a_route">The route from which to generate the route</param>
+		/// <param name="url">The url from which to generate the route</param>
+		/// <param name="route">The route from which to generate the route</param>
 		/// <returns>The route values</returns>
-		public static RouteValueDictionary GenerateInboundRoute(string a_url, Route a_route)
+		public static RouteValueDictionary GenerateInboundRoute(string url, Route route)
 		{
-			HttpContextBase mockHttp = HttpHelpers.MockHttpContext(a_url);
-			RouteData data = a_route.GetRouteData(mockHttp);
+			HttpContextBase mockHttp = HttpHelpers.MockHttpContext(url);
+			RouteData data = route.GetRouteData(mockHttp);
 			if (null != data)
 			{
 				return data.Values;
@@ -36,15 +36,15 @@ namespace Triggerfish.Web.Mvc.Testing
 		/// Create inbound route values from a string url. Requires a delegate
 		/// to populate a route collection with all possible routes.
 		/// </summary>
-		/// <param name="a_url">The url from which to generate the route</param>
-		/// <param name="a_registerRoutes">Delegate to register all possible routes</param>
+		/// <param name="url">The url from which to generate the route</param>
+		/// <param name="registerRoutes">Delegate to register all possible routes</param>
 		/// <returns>The route values</returns>
-		public static RouteValueDictionary GenerateInboundRoute(string a_url, Action<RouteCollection> a_registerRoutes)
+		public static RouteValueDictionary GenerateInboundRoute(string url, Action<RouteCollection> registerRoutes)
 		{
 			RouteCollection routes = new RouteCollection();
-			a_registerRoutes(routes);
+			registerRoutes(routes);
 
-			HttpContextBase mockHttp = HttpHelpers.MockHttpContext(a_url);
+			HttpContextBase mockHttp = HttpHelpers.MockHttpContext(url);
 
 			RouteData data = routes.GetRouteData(mockHttp);
 			if (null != data)

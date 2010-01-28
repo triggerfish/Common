@@ -18,6 +18,13 @@ namespace Triggerfish.Database
 		public virtual TId Id { get; private set; }
 
 		/// <summary>
+		/// Default constructor
+		/// </summary>
+		protected Entity()
+		{
+		}
+
+		/// <summary>
 		/// Constructor
 		/// </summary>
 		/// <param name="id">The primary key value</param>

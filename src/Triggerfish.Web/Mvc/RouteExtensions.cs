@@ -20,8 +20,8 @@ namespace Triggerfish.Web.Mvc
         /// assembly and registers a route for each method declaring a
         /// UrlRoute attribute.
         /// </summary>
-        /// <param name="a_routes">Route collection to add routes to.</param>
-        public static void RegisterRoutes(this RouteCollection a_routes)
+        /// <param name="routes">Route collection to add routes to.</param>
+        public static void RegisterRoutes(this RouteCollection routes)
         {
             // Enumerate assembly for UrlRoute attributes.
 			List<RouteParser> parsers = RouteParser.CreateFromAttributes(Assembly.GetCallingAssembly());
@@ -31,49 +31,49 @@ namespace Triggerfish.Web.Mvc
             // Add the routes to the routes collection.
 			foreach (RouteParser r in parsers)
             {
-				a_routes.Add(r.RouteName, new FriendlyUrlRoute(r.Url, r.Defaults, r.Constraints, new MvcRouteHandler()));
+				routes.Add(r.RouteName, new FriendlyUrlRoute(r.Url, r.Defaults, r.Constraints, new MvcRouteHandler()));
             }
         }
 
 		/// <summary>
 		/// Adds a route entry to the route collection
 		/// </summary>
-		/// <param name="a_routes">The route collection</param>
-		/// <param name="a_name">The name for the route (can be null)</param>
-		/// <param name="a_url">The url</param>
-		public static void MapFriendlyUrlRoute(this RouteCollection a_routes, string a_name, string a_url)
+		/// <param name="routes">The route collection</param>
+		/// <param name="name">The name for the route (can be null)</param>
+		/// <param name="url">The url</param>
+		public static void MapFriendlyUrlRoute(this RouteCollection routes, string name, string url)
 		{
-			a_routes.Add(a_name, new FriendlyUrlRoute(a_url, new MvcRouteHandler()));
+			routes.Add(name, new FriendlyUrlRoute(url, new MvcRouteHandler()));
 		}
 
 		/// <summary>
 		/// Adds a route entry to the route collection
 		/// </summary>
-		/// <param name="a_routes">The route collection</param>
-		/// <param name="a_name">The name for the route (can be null)</param>
-		/// <param name="a_url">The url</param>
-		/// <param name="a_defaults">The route default values</param>
-		public static void MapFriendlyUrlRoute(this RouteCollection a_routes, string a_name, string a_url, object a_defaults)
+		/// <param name="routes">The route collection</param>
+		/// <param name="name">The name for the route (can be null)</param>
+		/// <param name="url">The url</param>
+		/// <param name="defaults">The route default values</param>
+		public static void MapFriendlyUrlRoute(this RouteCollection routes, string name, string url, object defaults)
 		{
-			a_routes.Add(a_name, new FriendlyUrlRoute(a_url, new MvcRouteHandler())	{
-				Defaults = new RouteValueDictionary(a_defaults)
+			routes.Add(name, new FriendlyUrlRoute(url, new MvcRouteHandler())	{
+				Defaults = new RouteValueDictionary(defaults)
 			});
 		}
 
 		/// <summary>
 		/// Adds a route entry to the route collection
 		/// </summary>
-		/// <param name="a_routes">The route collection</param>
-		/// <param name="a_name">The name for the route (can be null)</param>
-		/// <param name="a_url">The url</param>
-		/// <param name="a_defaults">The route default values</param>
-		/// <param name="a_constraints">The route constraints</param>
-		public static void MapFriendlyUrlRoute(this RouteCollection a_routes, string a_name, string a_url, object a_defaults, object a_constraints)
+		/// <param name="routes">The route collection</param>
+		/// <param name="name">The name for the route (can be null)</param>
+		/// <param name="url">The url</param>
+		/// <param name="defaults">The route default values</param>
+		/// <param name="constraints">The route constraints</param>
+		public static void MapFriendlyUrlRoute(this RouteCollection routes, string name, string url, object defaults, object constraints)
 		{
-			a_routes.Add(a_name, new FriendlyUrlRoute(a_url, new MvcRouteHandler())
+			routes.Add(name, new FriendlyUrlRoute(url, new MvcRouteHandler())
 			{
-				Defaults = new RouteValueDictionary(a_defaults),
-				Constraints = new RouteValueDictionary(a_constraints)
+				Defaults = new RouteValueDictionary(defaults),
+				Constraints = new RouteValueDictionary(constraints)
 			});
 		}
 	}

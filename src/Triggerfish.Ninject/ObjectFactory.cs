@@ -32,12 +32,34 @@ namespace Triggerfish.Ninject
 		/// <summary>
 		/// Gets an object using Ninject
 		/// </summary>
+		/// <typeparam name="T">The type of object to return</typeparam>
+		/// <param name="type">The type of the object to get</param>
+		/// <returns>The object if successful, throws an exception if failed</returns>
+		public static T Get<T>(Type type)
+		{
+			return (T)Kernel.Get(type);
+		}
+
+		/// <summary>
+		/// Trys to get an object using Ninject
+		/// </summary>
 		/// <typeparam name="T">The type of object to get</typeparam>
 		/// <returns>The object if successful, null if failed</returns>
 		public static T TryGet<T>()
         {
 			return Kernel.TryGet<T>();
         }
+
+		/// <summary>
+		/// Trys to get an object using Ninject
+		/// </summary>
+		/// <typeparam name="T">The type of object to return</typeparam>
+		/// <param name="type">The type of the object to get</param>
+		/// <returns>The object if successful, throws an exception if failed</returns>
+		public static T TryGet<T>(Type type)
+		{
+			return (T)Kernel.TryGet(type);
+		}
 
 		/// <summary>
 		/// Load a new Ninject dependency module into the kernel

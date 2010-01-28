@@ -47,9 +47,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Authentication\BCrypt.cs" />
-    <Compile Include="Authentication\BCryptEncryptor.cs" />
-    <Compile Include="Authentication\Encryptor.cs" />
+    <Compile Include="Security\BCrypt.cs" />
+    <Compile Include="Security\BCryptEncryptor.cs" />
+    <Compile Include="Security\Encryptor.cs" />
     <Compile Include="Database\Entity.cs" />
     <Compile Include="Linq\IEnumerableExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

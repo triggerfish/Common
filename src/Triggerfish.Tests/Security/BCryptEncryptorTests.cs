@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Triggerfish.Authentication;
+using Triggerfish.Security;
 
-namespace Triggerfish.Tests.Authentication
+namespace Triggerfish.Tests.Security
 {
 	[TestClass]
 	public class BCryptEncryptorTests

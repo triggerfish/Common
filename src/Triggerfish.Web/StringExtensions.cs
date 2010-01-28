@@ -17,17 +17,17 @@ namespace Triggerfish
 		/// <summary>
 		/// Converts the first character of a string to uppercase
 		/// </summary>
-		/// <param name="a_string">The string to convert</param>
+		/// <param name="str">The string to convert</param>
 		/// <returns>A copy of the string with the first character capitalised</returns>
-		public static string Capitalise(this string a_string)
+		public static string Capitalise(this string str)
 		{
-			if (null == a_string)
+			if (null == str)
 				return null;
 
-			if (a_string.Length <= 1)
-				return a_string.ToUpper();
+			if (str.Length <= 1)
+				return str.ToUpper();
 
-			char[] c = a_string.ToCharArray();
+			char[] c = str.ToCharArray();
 			c[0] = Char.ToUpper(c[0]);
 			return new String(c);
 		}

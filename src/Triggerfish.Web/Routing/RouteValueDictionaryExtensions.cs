@@ -17,16 +17,16 @@ namespace Triggerfish.Web.Routing
 		/// <summary>
 		/// Adds a returnUrl parameter to the RouteValueDictionary
 		/// </summary>
-		/// <param name="a_route">The RouteValueDictionary object to amend</param>
-		/// <param name="a_url">The return url</param>
+		/// <param name="route">The RouteValueDictionary object to amend</param>
+		/// <param name="url">The return url</param>
 		/// <returns>The amended RouteValueDictionary object</returns>
-		public static RouteValueDictionary AddReturnUrl(this RouteValueDictionary a_route, string a_url)
+		public static RouteValueDictionary AddReturnUrl(this RouteValueDictionary route, string url)
 		{
-			if (null != a_url && !String.IsNullOrEmpty(a_url))
+			if (null != url && !String.IsNullOrEmpty(url))
 			{
-				a_route.Add("returnUrl", a_url);
+				route.Add("returnUrl", url);
 			}
-			return a_route;
+			return route;
 		}
 
 		/// <summary>
@@ -34,10 +34,10 @@ namespace Triggerfish.Web.Routing
 		/// instead of spaces.
 		/// It does not alter the controller and action route values
 		/// </summary>
-		/// <param name="a_route">Route value dictionary containing the route data</param>
-		public static RouteValueDictionary Encode(this RouteValueDictionary a_route)
+		/// <param name="route">Route value dictionary containing the route data</param>
+		public static RouteValueDictionary Encode(this RouteValueDictionary route)
 		{
-			return a_route.Convert(@" ", @"-", true);
+			return route.Convert(@" ", @"-", true);
 		}
 
 		/// <summary>
@@ -45,28 +45,28 @@ namespace Triggerfish.Web.Routing
 		/// It does not alter the case of the value and does not alter the controller 
 		/// and action route values
 		/// </summary>
-		/// <param name="a_route">Route value dictionary containing the route data</param>
-		public static RouteValueDictionary Decode(this RouteValueDictionary a_route)
+		/// <param name="route">Route value dictionary containing the route data</param>
+		public static RouteValueDictionary Decode(this RouteValueDictionary route)
 		{
-			return a_route.Convert(@"-", @" ", false);
+			return route.Convert(@"-", @" ", false);
 		}
 
-		private static RouteValueDictionary Convert(this RouteValueDictionary a_route, string a_pattern, string a_replacement, bool toLower)
+		private static RouteValueDictionary Convert(this RouteValueDictionary route, string pattern, string replacement, bool toLower)
 		{
-			foreach (string key in a_route.Select(kvp => kvp.Key).ToList())
+			foreach (string key in route.Select(kvp => kvp.Key).ToList())
 			{
-				if (a_route[key] is string)
+				if (route[key] is string)
 				{
-					string value = ((string)a_route[key]).Trim();
+					string value = ((string)route[key]).Trim();
 					if (toLower)
 					{
 						value = value.ToLower();
 					}
-					a_route[key] = Regex.Replace(value, a_pattern, a_replacement);
+					route[key] = Regex.Replace(value, pattern, replacement);
 				}
 			}
 
-			return a_route;
+			return route;
 		}
 	}
 }

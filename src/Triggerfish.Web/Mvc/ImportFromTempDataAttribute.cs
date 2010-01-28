@@ -19,12 +19,12 @@ namespace Triggerfish.Web.Mvc
 		/// <summary>
 		/// Constructor
 		/// </summary>
-		/// <param name="a_key">The key with which to store data in TempData</param>
-		/// <param name="a_modelType">The type of data to import</param>
-		protected ImportFromTempDataAttribute(string a_key, Type a_modelType)
-			: base(a_key)
+		/// <param name="key">The key with which to store data in TempData</param>
+		/// <param name="modelType">The type of data to import</param>
+		protected ImportFromTempDataAttribute(string key, Type modelType)
+			: base(key)
 		{
-			ModelType = a_modelType;
+			ModelType = modelType;
 		}
 
 		/// <summary>
@@ -51,8 +51,8 @@ namespace Triggerfish.Web.Mvc
 		/// <summary>
 		/// Abstract method to set the actual data object into the Controller object
 		/// </summary>
-		/// <param name="a_model">The object imported from TempData</param>
-		/// <param name="a_controller">The controller object</param>
-		protected abstract void SetModel(object a_model, ControllerBase a_controller);
+		/// <param name="model">The object imported from TempData</param>
+		/// <param name="controller">The controller object</param>
+		protected abstract void SetModel(object model, ControllerBase controller);
 	}
 }

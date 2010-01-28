@@ -36,6 +36,8 @@ namespace Triggerfish.NHibernate.Ninject
 				.To<Triggerfish.NHibernate.Validator.Validator>()
 				.InRequestScope()
 				.WithConstructorArgument("engine", ve);
+
+			SetupBindings();
 		}
 
 		/// <summary>
@@ -50,15 +52,15 @@ namespace Triggerfish.NHibernate.Ninject
 		/// </summary>
 		protected abstract void SetupBindings();
 
-		private void ConfigureValidator(global::NHibernate.Cfg.Configuration a_config, ValidatorEngine a_engine)
+		private void ConfigureValidator(global::NHibernate.Cfg.Configuration config, ValidatorEngine engine)
 		{
 			XmlConfiguration nhvc = new XmlConfiguration();
 			nhvc.Properties[global::NHibernate.Validator.Cfg.Environment.ApplyToDDL] = "true";
 			nhvc.Properties[global::NHibernate.Validator.Cfg.Environment.AutoregisterListeners] = "true";
 			nhvc.Properties[global::NHibernate.Validator.Cfg.Environment.ValidatorMode] = "UseAttribute";
 
-			a_engine.Configure(nhvc);
-			ValidatorInitializer.Initialize(a_config, a_engine);
+			engine.Configure(nhvc);
+			ValidatorInitializer.Initialize(config, engine);
 		}
 	}
 }

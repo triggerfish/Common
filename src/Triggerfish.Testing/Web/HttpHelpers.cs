@@ -16,9 +16,9 @@ namespace Triggerfish.Web.Testing
 		/// <summary>
 		/// Create a mock HttpContext object
 		/// </summary>
-		/// <param name="a_url">The url that initiated the HttpContext (can be null)</param>
+		/// <param name="url">The url that initiated the HttpContext (can be null)</param>
 		/// <returns>The http context</returns>
-		public static HttpContextBase MockHttpContext(string a_url)
+		public static HttpContextBase MockHttpContext(string url)
 		{
 			var context = new Mock<HttpContextBase>();
 
@@ -29,7 +29,7 @@ namespace Triggerfish.Web.Testing
 				.Returns(request.Object);
 			request
 				.Setup(x => x.AppRelativeCurrentExecutionFilePath)
-				.Returns(a_url);
+				.Returns(url);
 
 			// Mock the response
 			var mockResponse = new Mock<HttpResponseBase>();

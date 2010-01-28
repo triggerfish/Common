@@ -15,20 +15,20 @@ namespace Triggerfish.Web.Routing.Testing
 		/// <summary>
 		/// Tests whether two RouteValueDictionary objects have equal values
 		/// </summary>
-		/// <param name="a_expected">The expected values</param>
-		/// <param name="a_actual">The actual values</param>
-		public static void AreDictionariesEqual(RouteValueDictionary a_expected, RouteValueDictionary a_actual)
+		/// <param name="expected">The expected values</param>
+		/// <param name="actual">The actual values</param>
+		public static void AreDictionariesEqual(RouteValueDictionary expected, RouteValueDictionary actual)
 		{
-			if (ReferenceEquals(a_expected, a_actual))
+			if (ReferenceEquals(expected, actual))
 				return;
-			Assert.AreNotEqual(null, a_expected);
-			Assert.AreNotEqual(null, a_actual);
-			Assert.AreEqual(a_expected.Count, a_actual.Count);
+			Assert.AreNotEqual(null, expected);
+			Assert.AreNotEqual(null, actual);
+			Assert.AreEqual(expected.Count, actual.Count);
 
-			foreach (var kvp in a_expected)
+			foreach (var kvp in expected)
 			{
-				Assert.IsTrue(a_actual.ContainsKey(kvp.Key));
-					Assert.AreEqual(kvp.Value, a_actual[kvp.Key]);
+				Assert.IsTrue(actual.ContainsKey(kvp.Key));
+					Assert.AreEqual(kvp.Value, actual[kvp.Key]);
 			}
 		}
 	}

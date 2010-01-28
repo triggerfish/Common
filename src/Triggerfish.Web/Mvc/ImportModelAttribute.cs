@@ -14,21 +14,21 @@ namespace Triggerfish.Web.Mvc
 		/// <summary>
 		/// Constuctor
 		/// </summary>
-		/// <param name="a_key">The key with which to store data in TempData</param>
-		/// <param name="a_modelType">The type of data object in ViewData.Model</param>
-		public ImportModelAttribute(string a_key, Type a_modelType)
-			: base(a_key, a_modelType)
+		/// <param name="key">The key with which to store data in TempData</param>
+		/// <param name="modelType">The type of data object in ViewData.Model</param>
+		public ImportModelAttribute(string key, Type modelType)
+			: base(key, modelType)
 		{
 		}
 
 		/// <summary>
 		/// Abstract method implementation to set the object in ViewData.Model
 		/// </summary>
-		/// <param name="a_model">The ViewData.Model object</param>
-		/// <param name="a_controller">The controller object</param>
-		protected override void SetModel(object a_model, ControllerBase a_controller)
+		/// <param name="model">The ViewData.Model object</param>
+		/// <param name="controller">The controller object</param>
+		protected override void SetModel(object model, ControllerBase controller)
 		{
-			a_controller.ViewData.Model = a_model;
+			controller.ViewData.Model = model;
 		}
 	}
 }

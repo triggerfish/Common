@@ -35,15 +35,15 @@ namespace Triggerfish.Testing.Tests
 			Assert.AreEqual("/", UrlHelpers.SanitiseUrl("/secret", RegisterRoutes, false));
 		}
 	
-		private static void RegisterRoutes(RouteCollection a_routes)
+		private static void RegisterRoutes(RouteCollection routes)
 		{
-			a_routes.MapRoute(
+			routes.MapRoute(
 				null,
 				"artists/{genre}",
 				new { controller = "Artists", Action = "List", genre = "All" }
 			);
 			
-			a_routes.MapRoute(
+			routes.MapRoute(
 				null,
 				"secret",
 				new { controller = "Secret", Action = "Index" }

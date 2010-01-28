@@ -32,12 +32,12 @@ namespace Triggerfish.Web.Mvc
 		/// <summary>
 		/// Constructor
 		/// </summary>
-		/// <param name="a_algorithm">The algorithm to use to calculate the page links to display on the page</param>
-		/// <param name="a_htmlGenerator">Interface with which to generate the page links html</param>
-		public PagedList(IPageLinksAlgorithm a_algorithm, IPageLinkHtmlGenerator a_htmlGenerator)
+		/// <param name="algorithm">The algorithm to use to calculate the page links to display on the page</param>
+		/// <param name="htmlGenerator">Interface with which to generate the page links html</param>
+		public PagedList(IPageLinksAlgorithm algorithm, IPageLinkHtmlGenerator htmlGenerator)
 		{
-			m_pageLinksAlgorithm = a_algorithm;
-			m_pageLinksHtmlGenerator = a_htmlGenerator;
+			m_pageLinksAlgorithm = algorithm;
+			m_pageLinksHtmlGenerator = htmlGenerator;
 		}
 
 		/// <summary>
