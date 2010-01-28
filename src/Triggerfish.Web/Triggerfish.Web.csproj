@@ -37,6 +37,7 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Web" />
     <Reference Include="System.Web.Abstractions">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -54,6 +55,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Diagnostics\Diagnostics.cs" />
+    <Compile Include="Diagnostics\DiagnosticsResponseFilter.cs" />
+    <Compile Include="Diagnostics\DiagnosticsModule.cs" />
+    <Compile Include="Mvc\ModelBinder.cs" />
     <Compile Include="Mvc\PageLinkExtensions.cs" />
     <Compile Include="Mvc\FirstPrevNextLastPageLinkHtmlGenerator.cs" />
     <Compile Include="Mvc\HtmlHelpers.cs" />
@@ -70,6 +75,7 @@
     <Compile Include="Mvc\PageLinksAlgorithm.cs" />
     <Compile Include="Mvc\PageUrlGenerator.cs" />
     <Compile Include="Mvc\TempDataAttribute.cs" />
+    <Compile Include="Mvc\ValidatorExtensions.cs" />
     <Compile Include="Routing\RouteValueDictionaryExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Routing\FriendlyUrlRoute.cs" />
@@ -78,7 +84,15 @@
     <Compile Include="Mvc\RouteConstraintAttribute.cs" />
     <Compile Include="Mvc\RouteDefaultAttribute.cs" />
     <Compile Include="Mvc\RouteParser.cs" />
+    <Compile Include="Security\AuthenticationProvider.cs" />
+    <Compile Include="Security\FormsAuthenticationProvider.cs" />
     <Compile Include="StringExtensions.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Triggerfish\Triggerfish.csproj">
+      <Project>{C336D362-D101-4103-B3AC-32AE6F77477E}</Project>
+      <Name>Triggerfish</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

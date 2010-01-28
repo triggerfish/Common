@@ -15,7 +15,7 @@ namespace Triggerfish.Validator
 		/// A collection of errors. Key is the name of the source of the error
 		/// and the value is the error message
 		/// </summary>
-		public NameValueCollection Errors { get; private set; }
+		public NameValueCollection Errors { get; set; }
 
 		/// <summary>
 		/// Constructor
