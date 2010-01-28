@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Web.Routing;
+using System.Reflection;
 
 namespace Triggerfish.Web.Mvc.Testing
 {
@@ -35,7 +36,7 @@ namespace Triggerfish.Web.Mvc.Testing
 		/// <returns>A sanitised valid url for the site</returns>
 		public static string SanitiseUrl(string url, Action<RouteCollection> registerRoutes, bool allowAuthoriseAttributeOnAction)
 		{
-			return RouteInformation.Create(url, registerRoutes).SanitiseUrl(allowAuthoriseAttributeOnAction);
+			return RouteInformation.Create(url, registerRoutes).SanitiseUrl(allowAuthoriseAttributeOnAction, Assembly.GetCallingAssembly());
 		}
 	}
 }
