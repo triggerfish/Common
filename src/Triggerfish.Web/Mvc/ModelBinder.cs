@@ -33,14 +33,7 @@ namespace Triggerfish.Web.Mvc
 
 			try
 			{
-				object obj = Bind();
-
-				if (null != obj)
-				{
-					Validate(obj);
-				}
-
-				return obj;
+				return Bind();
 			}
 			catch (ValidationException ex)
 			{
@@ -55,12 +48,6 @@ namespace Triggerfish.Web.Mvc
 		/// </summary>
 		/// <returns>The model object</returns>
 		protected abstract object Bind();
-
-		/// <summary>
-		/// Validate the object against the project validation strategy
-		/// </summary>
-		/// <param name="obj"></param>
-		protected abstract void Validate(object obj);
 
 		/// <summary>
 		/// Helper method to retrieve from the binding context a data value

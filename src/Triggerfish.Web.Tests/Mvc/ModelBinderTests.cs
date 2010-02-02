@@ -126,9 +126,5 @@ namespace Triggerfish.Web.Tests
 		{
 			return GetValue(Key, MustHave);
 		}
-
-		protected override void Validate(object obj)
-		{
-		}
 	}
 }
