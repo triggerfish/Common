@@ -10,11 +10,6 @@ namespace Triggerfish.Web.Diagnostics
 	public interface IDiagnostics
 	{
 		/// <summary>
-		/// A unique key to identify this specific diagnostic object
-		/// </summary>
-		string Key { get; }
-
-		/// <summary>
 		/// Start tracking/recording diagnostic data
 		/// </summary>
 		void Start();

@@ -9,53 +9,16 @@ namespace Triggerfish.Web.Diagnostics
 	/// </summary>
 	public abstract class DiagnosticsModule : IHttpModule
 	{
-		private string m_key;
+		private IDiagnostics m_diagnostics;
 
 		/// <summary>
 		/// Initialised per request
 		/// </summary>
-		/// <param name="appContext">The application context</param>
-		public void Init(HttpApplication appContext)
+		/// <param name="application">The application context</param>
+		public void Init(HttpApplication application)
 		{
-			appContext.PreRequestHandlerExecute += (sender, e) =>
-			{
-				StartDiagnostics(((HttpApplication)sender).Context);
-			};
-
-			appContext.PostRequestHandlerExecute += (sender, e) =>
-			{
-				StopDiagnostics(((HttpApplication)sender).Context);
-			};
-		}
-
-		/// <summary>
-		/// Start the diagnostics running
-		/// </summary>
-		/// <param name="context">HttpContext object</param>
-		public void StartDiagnostics(HttpContext context)
-		{
-			IDiagnostics d = CreateDiagnostics();
-			if (null != d)
-			{
-				m_key = d.Key;
-				context.Items[m_key] = d;
-				d.Start();
-			}
-		}
-
-		/// <summary>
-		/// Stop the diagnostics running and write data to HTML page
-		/// </summary>
-		/// <param name="context">HttpContext object</param>
-		public void StopDiagnostics(HttpContext context)
-		{
-			if (!String.IsNullOrEmpty(m_key) && context.Items.Contains(m_key))
-			{
-				IDiagnostics d = context.Items[m_key] as IDiagnostics;
-				d.Stop();
-				context.Items.Remove(m_key);
-				context.Response.Filter = new DiagnosticsResponseFilter(context.Response.Filter, d.ToHtmlString());
-			}
+			application.PreRequestHandlerExecute += new EventHandler(Application_PreRequestHandlerExecute);
+			application.PostRequestHandlerExecute += new EventHandler(Application_PostRequestHandlerExecute);
 		}
 
 		/// <summary>
@@ -68,5 +31,32 @@ namespace Triggerfish.Web.Diagnostics
 		/// </summary>
 		/// <returns></returns>
 		protected abstract IDiagnostics CreateDiagnostics();
+
+		private void Application_PreRequestHandlerExecute(object sender, EventArgs e)
+		{
+			HttpContext context = ((HttpApplication)sender).Context;
+
+			if (null == m_diagnostics)
+			{
+				m_diagnostics = CreateDiagnostics();
+				if (null != m_diagnostics)
+				{
+					m_diagnostics.Start();
+				}
+			}
+		}
+
+		private void Application_PostRequestHandlerExecute(object sender, EventArgs e)
+		{
+			HttpContext context = ((HttpApplication)sender).Context;
+
+			if (null != m_diagnostics && context.Response.ContentType == "text/html")
+			{
+				m_diagnostics.Stop();
+				context.Response.Filter = new DiagnosticsResponseFilter(context.Response.Filter, m_diagnostics.ToHtmlString());
+				m_diagnostics = null;
+			}
+		}
+
 	}
 }
