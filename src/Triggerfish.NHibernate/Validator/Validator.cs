@@ -30,7 +30,10 @@ namespace Triggerfish.NHibernate.Validator
 		/// <param name="obj">The object to validate</param>
 		public void Validate(object obj)
 		{
-			throw m_engine.Validate(obj).ToValidationException();
+			ValidationException ex = m_engine.Validate(obj).ToValidationException();
+
+			if (null != ex)
+				throw ex;
 		}
 	}
 }
