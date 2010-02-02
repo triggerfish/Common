@@ -1,25 +1,23 @@
-﻿using Ninject.Modules;
-using FluentNHibernate.Cfg;
+﻿using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using System.Reflection;
 
-namespace Triggerfish.NHibernate.Ninject
+namespace Triggerfish.NHibernate
 {
 	/// <summary>
-	/// Provides a connection to a SQL Server database
+	/// SQL Server database configuration
 	/// </summary>
-	/// <typeparam name="T"></typeparam>
-	public abstract class SqlServerModule<T> : DatabaseModule<T>
+	public class SqlServerModule : IDatabaseConfiguration
     {
-		private string m_server;
-		private string m_database;
+		private readonly string m_server;
+		private readonly string m_database;
 
 		/// <summary>
 		/// Constructor
 		/// </summary>
 		/// <param name="server">The path to the server</param>
 		/// <param name="database">The name of the database</param>
-		protected SqlServerModule(string server, string database)
+		public SqlServerModule(string server, string database)
 		{
 			m_server = server;
 			m_database = database;
@@ -28,8 +26,9 @@ namespace Triggerfish.NHibernate.Ninject
 		/// <summary>
 		/// Returns the FluentNHibernate SQL Server configuration data
 		/// </summary>
+		/// <param name="assembly">The assembly containing the mappings</param>
 		/// <returns>SQL Server configuration</returns>
-		protected override IPersistenceConfigurer CreateDatabase()
+		IPersistenceConfigurer IDatabaseConfiguration.Create(Assembly assembly)
 		{
 			return MsSqlConfiguration.MsSql2005
 						.ConnectionString(c => c

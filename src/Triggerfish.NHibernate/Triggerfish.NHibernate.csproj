@@ -53,6 +53,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\tools\NHibernate\NHibernate.ByteCode.LinFu.dll</HintPath>
     </Reference>
+    <Reference Include="NHibernate.Linq, Version=1.1.0.1001, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\tools\NHibernate\NHibernate.Linq.dll</HintPath>
+    </Reference>
     <Reference Include="NHibernate.Validator, Version=1.2.0.3001, Culture=neutral, PublicKeyToken=70154e18752585bd, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\tools\NHibernate\NHibernate.Validator.dll</HintPath>
@@ -60,10 +64,6 @@
     <Reference Include="NHibernate.Validator.Specific, Version=1.2.0.3001, Culture=neutral, PublicKeyToken=70154e18752585bd, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\tools\NHibernate\NHibernate.Validator.Specific.dll</HintPath>
-    </Reference>
-    <Reference Include="Ninject, Version=2.0.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\tools\Ninject\Ninject.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
@@ -79,14 +79,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Fluent\Database.cs" />
     <Compile Include="Fluent\Session.cs" />
-    <Compile Include="Ninject\DatabaseModule.cs" />
-    <Compile Include="Ninject\SqliteModule.cs" />
-    <Compile Include="Ninject\SqlServerModule.cs" />
-    <Compile Include="SessionExtensions.cs" />
+    <Compile Include="Fluent\Configuration.cs" />
+    <Compile Include="Fluent\SqliteDatabase.cs" />
+    <Compile Include="Fluent\SqlServerConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository.cs" />
+    <Compile Include="SessionExtensions.cs" />
     <Compile Include="SQLlogger.cs" />
     <Compile Include="Validator\Validator.cs" />
+    <Compile Include="Validator\ValidatorExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Triggerfish\Triggerfish.csproj">
