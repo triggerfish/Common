@@ -30,18 +30,7 @@ namespace Triggerfish.NHibernate.Validator
 		/// <param name="obj">The object to validate</param>
 		public void Validate(object obj)
 		{
-			InvalidValue[] errors = m_engine.Validate(obj);
-			if (null != errors && errors.Length > 0)
-			{
-				ValidationException ex = new ValidationException();
-
-				foreach (InvalidValue val in errors)
-				{
-					ex.Errors.Add(val.PropertyName, val.Message);
-				}
-
-				throw ex;
-			}
+			throw m_engine.Validate(obj).ToValidationException();
 		}
 	}
 }
