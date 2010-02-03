@@ -6,7 +6,6 @@ using NHibernate;
 using FluentNHibernate;
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
-using Triggerfish.FluentNHibernate;
 
 namespace Triggerfish.NHibernate
 {
@@ -20,11 +19,10 @@ namespace Triggerfish.NHibernate
 		/// <summary>
 		/// Constructor
 		/// </summary>
-		/// <param name="filename">The name of the SQLite database file</param>
-		public SqliteDatabase(string filename)
+		/// <param name="path">The path and name of the SQLite database file</param>
+		public SqliteDatabase(string path)
 		{
-			Uri uri = new Uri(Assembly.GetCallingAssembly().CodeBase);
-			m_strDbPath =  Path.Combine(Path.GetDirectoryName(uri.LocalPath), filename);
+			m_strDbPath =  path;
 		}
 
 		/// <summary>
@@ -44,9 +42,10 @@ namespace Triggerfish.NHibernate
 				PersistenceModel pm = new PersistenceModel();
 				pm.AddMappingsFromAssembly(assembly);
 
-				Session ss = new Session(config.ToProperties(), pm);
+
+				SessionSource ss = new SessionSource(config.ToProperties(), pm);
 				ss.BuildSchema();
-				ss.Close();
+				ss = null;
 			}
 
 			return config;

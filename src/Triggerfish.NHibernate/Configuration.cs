@@ -4,15 +4,14 @@ using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using NHibernate.Validator.Cfg;
 using NHibernate.Validator.Engine;
-using Triggerfish.FluentNHibernate;
+using System;
 
 namespace Triggerfish.NHibernate
 {
 	/// <summary>
 	/// NHibernate configuration
 	/// </summary>
-	/// <typeparam name="T">A type from the assembly containing FluentNHibernate mappings</typeparam>
-	public class Configuration<T>
+	public class Configuration
 	{
 		private IDatabaseConfiguration m_database;
 
@@ -38,7 +37,7 @@ namespace Triggerfish.NHibernate
 		/// <summary>
 		/// Create the configuration
 		/// </summary>
-		public virtual void Create()
+		public virtual void Create<T>()
 		{
 			log4net.Config.XmlConfigurator.Configure();
 

@@ -7,7 +7,6 @@ using NHibernate;
 using NHibernate.Linq;
 using Triggerfish.NHibernate;
 using NHibernate.Validator.Exceptions;
-using Triggerfish.FluentNHibernate;
 using Triggerfish.Linq;
 
 namespace Triggerfish.NHibernate
@@ -28,16 +27,7 @@ namespace Triggerfish.NHibernate
 		/// <param name="session">A NHibernate session</param>
 		public Repository(ISession session)
 		{
-			Session = session;
-		}
-
-		/// <summary>
-		/// Constructor
-		/// </summary>
-		/// <param name="session">A NHibernate session</param>
-		public Repository(IDbSession session)
-			: this(session.CreateSession())
-		{
+		    Session = session;
 		}
 
 		/// <summary>
@@ -68,7 +58,7 @@ namespace Triggerfish.NHibernate
 		/// <param name="target">the object</param>
 		public virtual void Delete<T>(T target)
 		{
-			Session.WithinTransaction(s => s.Delete(target));
+			Session.Delete(target);
 		}
 
 		/// <summary>
@@ -78,9 +68,7 @@ namespace Triggerfish.NHibernate
 		/// <param name="target">The object to save or update</param>
 		public virtual void Save<T>(T target)
 		{
-			Session.WithinTransaction(s => s.SaveOrUpdate(target));
-
-			// what about if SaveOrUpdate throws?
+			Session.SaveOrUpdate(target);
 		}
 
 		/// <summary>
@@ -91,7 +79,7 @@ namespace Triggerfish.NHibernate
 		public virtual void Save<T>(IEnumerable<T> targets)
 		{
 			IEnumerable<object> objs = targets.Cast<object>();
-			Session.WithinTransaction(s => objs.ForEach(s.SaveOrUpdate));
+			objs.ForEach(o => Session.SaveOrUpdate(o));
 		}
 	}
 }

@@ -47,6 +47,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Database\UnitOfWorkFactory.cs" />
+    <Compile Include="Database\UnitOfWorkStorage.cs" />
+    <Compile Include="Database\UnitOfWork.cs" />
     <Compile Include="Security\BCrypt.cs" />
     <Compile Include="Security\BCryptEncryptor.cs" />
     <Compile Include="Security\Encryptor.cs" />
