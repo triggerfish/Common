@@ -32,10 +32,12 @@ namespace Triggerfish.Web.Diagnostics
 		/// <returns></returns>
 		protected abstract IDiagnostics CreateDiagnostics();
 
-		private void Application_PreRequestHandlerExecute(object sender, EventArgs e)
+		/// <summary>
+		/// Starts the diagnostics
+		/// </summary>
+		/// <param name="context">HttpContext</param>
+		protected virtual void Start(HttpContext context)
 		{
-			HttpContext context = ((HttpApplication)sender).Context;
-
 			if (null == m_diagnostics)
 			{
 				m_diagnostics = CreateDiagnostics();
@@ -43,13 +45,15 @@ namespace Triggerfish.Web.Diagnostics
 				{
 					m_diagnostics.Start();
 				}
-			}
+			}		
 		}
 
-		private void Application_PostRequestHandlerExecute(object sender, EventArgs e)
+		/// <summary>
+		/// Stops the diagnostics
+		/// </summary>
+		/// <param name="context">HttpContext</param>
+		protected virtual void Stop(HttpContext context)
 		{
-			HttpContext context = ((HttpApplication)sender).Context;
-
 			if (null != m_diagnostics && context.Response.ContentType == "text/html")
 			{
 				m_diagnostics.Stop();
@@ -58,5 +62,14 @@ namespace Triggerfish.Web.Diagnostics
 			}
 		}
 
+		private void Application_PreRequestHandlerExecute(object sender, EventArgs e)
+		{
+			Start(((HttpApplication)sender).Context);
+		}
+
+		private void Application_PostRequestHandlerExecute(object sender, EventArgs e)
+		{
+			Stop(((HttpApplication)sender).Context);
+		}
 	}
 }

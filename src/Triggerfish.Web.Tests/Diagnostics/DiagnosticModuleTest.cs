@@ -15,44 +15,42 @@ namespace Triggerfish.Web.Tests.Diagnostics
 		HttpContext m_ctx = new HttpContext(new HttpRequest(null, "http://localhost/", null), new HttpResponse(new StringWriter()));
 
 		[TestMethod]
-		public void ShouldStartDiagnostics()
+		public void ShouldStart()
 		{
 			// arrange
 			MockDiagnosticsModule module = new MockDiagnosticsModule();
 
 			// act
-			module.StartDiagnostics(m_ctx);
+			module.TestStart(m_ctx);
 
 			// assert
-			Assert.IsTrue(m_ctx.Items.Contains(module.m_key));
 			module.m_diagnostics.Verify(x => x.Start());
 		}
 
 		[TestMethod]
-		public void ShouldNotStartDiagnosticsIfNoDiagnosticsProvided()
+		public void ShouldNotStartIfNoDiagnosticsProvided()
 		{
 			// arrange
 			MockDiagnosticsModule module = new MockDiagnosticsModule(true);
 
 			// act
-			module.StartDiagnostics(m_ctx);
+			module.TestStart(m_ctx);
 
 			// assert
-			Assert.IsFalse(m_ctx.Items.Contains(module.m_key));
 			module.m_diagnostics.Verify(x => x.Start(), Times.Never());
 		}
 
 		[TestMethod]
-		public void ShouldStopDiagnostics()
+		public void ShouldStop()
 		{
 			// arrange
 			MockDiagnosticsModule module = new MockDiagnosticsModule();
-			module.StartDiagnostics(m_ctx);
+			module.TestStart(m_ctx);
 
 			// act
 			try
 			{
-				module.StopDiagnostics(m_ctx);
+				module.TestStop(m_ctx);
 			}
 			catch (HttpException)
 			{
@@ -61,7 +59,6 @@ namespace Triggerfish.Web.Tests.Diagnostics
 				// is the HttpWriter can only be set internally to the HttpResponse assembly.
 
 				// assert
-				Assert.IsFalse(m_ctx.Items.Contains(module.m_key));
 				module.m_diagnostics.Verify(x => x.Stop());
 				return;
 			}
@@ -70,40 +67,23 @@ namespace Triggerfish.Web.Tests.Diagnostics
 		}
 
 		[TestMethod]
-		public void ShouldNotStopDiagnosticsIfIfKeyNull()
+		public void ShouldNotStopIfContentTypeIsNotHtml()
 		{
 			// arrange
 			MockDiagnosticsModule module = new MockDiagnosticsModule();
+			m_ctx.Response.ContentType = "other";
+			module.TestStart(m_ctx);
 
 			// act
-			module.StopDiagnostics(m_ctx);
+			module.TestStop(m_ctx);
 
 			// assert
-			Assert.IsFalse(m_ctx.Items.Contains(module.m_key));
-			module.m_diagnostics.Verify(x => x.Stop(), Times.Never());
-		}
-
-		[TestMethod]
-		public void ShouldNotStopDiagnosticsIfDiagnosticsDoNotExist()
-		{
-			// arrange
-			MockDiagnosticsModule module = new MockDiagnosticsModule();
-			module.StartDiagnostics(m_ctx);
-			m_ctx.Items.Remove(module.m_key);
-
-			// act
-			module.StopDiagnostics(m_ctx);
-
-			// assert
-			Assert.IsFalse(m_ctx.Items.Contains(module.m_key));
 			module.m_diagnostics.Verify(x => x.Stop(), Times.Never());
 		}
 	}
 
 	internal class MockDiagnosticsModule : DiagnosticsModule
 	{
-		public readonly string m_key = "MockDiagnosticsModule";
-		public readonly string m_htmlString = "<div>diagnostics data</div>";
 		public Mock<IDiagnostics> m_diagnostics = new Mock<IDiagnostics>();
 		private bool m_returnNull = false;
 
@@ -113,13 +93,21 @@ namespace Triggerfish.Web.Tests.Diagnostics
 			m_returnNull = returnNull;
 		}
 
+		public void TestStart(HttpContext context)
+		{
+			base.Start(context);
+		}
+
+		public void TestStop(HttpContext context)
+		{
+			base.Stop(context);
+		}
+
 		protected override IDiagnostics CreateDiagnostics()
 		{
 			if (m_returnNull)
 				return null;
 
-			m_diagnostics.Setup(d => d.Key).Returns(m_key);
-			m_diagnostics.Setup(d => d.ToHtmlString()).Returns(m_htmlString);
 			return m_diagnostics.Object;
 		}
 	}
