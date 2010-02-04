@@ -24,9 +24,23 @@ namespace Triggerfish.NHibernate
 		/// Initialiser method
 		/// </summary>
 		/// <param name="config">The fluent NHibernate configuration from which to build a session factory</param>
-		public static void Initialise(FluentConfiguration config)
+		/// <param name="storage">The storage mechanism to use</param>
+		public static void Initialise(FluentConfiguration config, UnitOfWorkStorageType storage)
 		{
-			Initialise(config, new WebSessionStorage());
+			IUnitOfWorkStorage storageObj;
+			switch (storage)
+			{
+				case UnitOfWorkStorageType.Simple:
+					storageObj = new SimpleSessionStorage();
+					break;
+				case UnitOfWorkStorageType.Web:
+					storageObj = new WebSessionStorage();
+					break;
+				default:
+					throw new ArgumentException("Unknown storage type specified");
+			}
+
+			Initialise(config, storageObj);
 		}
 
 		/// <summary>
@@ -56,8 +70,7 @@ namespace Triggerfish.NHibernate
 		/// <returns>An ISession</returns>
 		public static ISession GetCurrentSession()
 		{
-			UnitOfWorkFactory factory = new UnitOfWorkFactory();
-			UnitOfWork uow = factory.GetCurrentUnitOfWork() as UnitOfWork;
+			UnitOfWork uow = GetCurrentUnitOfWork() as UnitOfWork;
 
 			if (null == uow || !uow.IsActive)
 			{
@@ -73,7 +86,7 @@ namespace Triggerfish.NHibernate
 		/// Gets the current unit of work
 		/// </summary>
 		/// <returns>The current unit of work object</returns>
-		public IUnitOfWork GetCurrentUnitOfWork()
+		public static IUnitOfWork GetCurrentUnitOfWork()
 		{
 			return m_storage.GetCurrentUnitOfWork();
 		}
@@ -81,7 +94,7 @@ namespace Triggerfish.NHibernate
 		/// <summary>
 		/// Closes the unit of work currently open
 		/// </summary>
-		public void CloseCurrentUnitOfWork()
+		public static void CloseCurrentUnitOfWork()
 		{
 			IUnitOfWork uow = GetCurrentUnitOfWork();
 			if (null != uow)
@@ -89,6 +102,23 @@ namespace Triggerfish.NHibernate
 				uow.End();
 				m_storage.DeleteCurrentUnitOfWork();
 			}
+		}
+
+		/// <summary>
+		/// Gets the current unit of work
+		/// </summary>
+		/// <returns>The current unit of work object</returns>
+		IUnitOfWork IUnitOfWorkFactory.GetCurrentUnitOfWork()
+		{
+			return UnitOfWorkFactory.GetCurrentUnitOfWork();
+		}
+
+		/// <summary>
+		/// Closes the unit of work currently open
+		/// </summary>
+		void IUnitOfWorkFactory.CloseCurrentUnitOfWork()
+		{
+			UnitOfWorkFactory.CloseCurrentUnitOfWork();
 		}
 	}
 }
