@@ -47,18 +47,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Database\UnitOfWorkFactory.cs" />
-    <Compile Include="Database\UnitOfWorkStorage.cs" />
-    <Compile Include="Database\UnitOfWork.cs" />
+    <Compile Include="Database\IUnitOfWorkFactory.cs" />
+    <Compile Include="Database\IUnitOfWorkStorage.cs" />
+    <Compile Include="Database\IUnitOfWork.cs" />
     <Compile Include="Database\UnitOfWorkStorageType.cs" />
     <Compile Include="Security\BCrypt.cs" />
     <Compile Include="Security\BCryptEncryptor.cs" />
-    <Compile Include="Security\Encryptor.cs" />
+    <Compile Include="Security\IEncryptor.cs" />
     <Compile Include="Database\Entity.cs" />
-    <Compile Include="Linq\IEnumerableExtensions.cs" />
+    <Compile Include="Linq\EnumerableExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Validator\ValidationException.cs" />
-    <Compile Include="Validator\Validator.cs" />
+    <Compile Include="Validator\IValidator.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

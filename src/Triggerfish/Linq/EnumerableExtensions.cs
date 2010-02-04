@@ -6,7 +6,7 @@ namespace Triggerfish.Linq
 	/// <summary>
 	/// Extension methods for IEnumerable
 	/// </summary>
-    public static class IEnumerableExtensions
+    public static class EnumerableExtensions
     {
 		/// <summary>
 		/// Iterates over each element in the IEnumerable and invokes the

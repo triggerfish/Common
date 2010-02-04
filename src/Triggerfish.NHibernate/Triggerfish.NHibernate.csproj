@@ -83,7 +83,7 @@
     <Compile Include="SimpleSessionStorage.cs" />
     <Compile Include="WebSessionStorage.cs" />
     <Compile Include="UnitOfWorkFactory.cs" />
-    <Compile Include="Database.cs" />
+    <Compile Include="IDatabaseConfiguration.cs" />
     <Compile Include="UnitOfWork.cs" />
     <Compile Include="Configuration.cs" />
     <Compile Include="SqliteDatabase.cs" />

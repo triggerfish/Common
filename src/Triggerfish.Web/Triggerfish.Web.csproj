@@ -55,14 +55,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Diagnostics\Diagnostics.cs" />
+    <Compile Include="Diagnostics\IDiagnostics.cs" />
     <Compile Include="Diagnostics\DiagnosticsResponseFilter.cs" />
     <Compile Include="Diagnostics\DiagnosticsModule.cs" />
     <Compile Include="Mvc\ModelBinder.cs" />
     <Compile Include="Mvc\PageLinkExtensions.cs" />
     <Compile Include="Mvc\FirstPrevNextLastPageLinkHtmlGenerator.cs" />
     <Compile Include="Mvc\HtmlHelpers.cs" />
-    <Compile Include="Mvc\PageLinkHtmlGenerator.cs" />
+    <Compile Include="Mvc\IPageLinkHtmlGenerator.cs" />
     <Compile Include="Mvc\PageLinkCentredAlgorithm.cs" />
     <Compile Include="Mvc\PageLink.cs" />
     <Compile Include="Mvc\PagedList.cs" />
@@ -72,7 +72,7 @@
     <Compile Include="Mvc\ImportFromTempDataAttribute.cs" />
     <Compile Include="Mvc\ImportModelAttribute.cs" />
     <Compile Include="Mvc\ImportModelStateAttribute.cs" />
-    <Compile Include="Mvc\PageLinksAlgorithm.cs" />
+    <Compile Include="Mvc\IPageLinksAlgorithm.cs" />
     <Compile Include="Mvc\PageUrlGenerator.cs" />
     <Compile Include="Mvc\TempDataAttribute.cs" />
     <Compile Include="Mvc\ValidatorExtensions.cs" />
@@ -84,7 +84,7 @@
     <Compile Include="Mvc\RouteConstraintAttribute.cs" />
     <Compile Include="Mvc\RouteDefaultAttribute.cs" />
     <Compile Include="Mvc\RouteParser.cs" />
-    <Compile Include="Security\AuthenticationProvider.cs" />
+    <Compile Include="Security\IAuthenticationProvider.cs" />
     <Compile Include="Security\FormsAuthenticationProvider.cs" />
     <Compile Include="StringExtensions.cs" />
   </ItemGroup>
