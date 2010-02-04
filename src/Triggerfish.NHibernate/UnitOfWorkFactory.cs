@@ -17,30 +17,21 @@ namespace Triggerfish.NHibernate
 	/// </summary>
 	public class UnitOfWorkFactory : IUnitOfWorkFactory
 	{
-		private static ISessionFactory m_factory;
-		private static IUnitOfWorkStorage m_storage;
+		private static ISessionFactory m_sessionFactory;
+
+		/// <summary>
+		/// Property for the UoW storage mechanism
+		/// </summary>
+		public static IUnitOfWorkStorage Storage { get; private set; }
 
 		/// <summary>
 		/// Initialiser method
 		/// </summary>
 		/// <param name="config">The fluent NHibernate configuration from which to build a session factory</param>
-		/// <param name="storage">The storage mechanism to use</param>
-		public static void Initialise(FluentConfiguration config, UnitOfWorkStorageType storage)
+		/// <param name="storageType">The storage mechanism to use</param>
+		public static void Initialise(FluentConfiguration config, UnitOfWorkStorageType storageType)
 		{
-			IUnitOfWorkStorage storageObj;
-			switch (storage)
-			{
-				case UnitOfWorkStorageType.Simple:
-					storageObj = new SimpleSessionStorage();
-					break;
-				case UnitOfWorkStorageType.Web:
-					storageObj = new WebSessionStorage();
-					break;
-				default:
-					throw new ArgumentException("Unknown storage type specified");
-			}
-
-			Initialise(config, storageObj);
+			Initialise(config.BuildSessionFactory(), storageType);
 		}
 
 		/// <summary>
@@ -56,12 +47,35 @@ namespace Triggerfish.NHibernate
 		/// <summary>
 		/// Initialiser method
 		/// </summary>
-		/// <param name="factory">ISessionFactory interface instance</param>
-		/// <param name="storage">IUnitOfWorkStorage interface instance</param>
+		/// <param name="factory">The NHibernate session factory</param>
+		/// <param name="storageType">The storage mechanism to use</param>
+		public static void Initialise(ISessionFactory factory, UnitOfWorkStorageType storageType)
+		{
+			IUnitOfWorkStorage storageObj;
+			switch (storageType)
+			{
+				case UnitOfWorkStorageType.Simple:
+					storageObj = new SimpleSessionStorage();
+					break;
+				case UnitOfWorkStorageType.Web:
+					storageObj = new WebSessionStorage();
+					break;
+				default:
+					throw new ArgumentOutOfRangeException("Unknown storage type specified");
+			}
+
+			Initialise(factory, storageObj);
+		}
+
+		/// <summary>
+		/// Initialiser method
+		/// </summary>
+		/// <param name="factory">The NHibernate session factory</param>
+		/// <param name="storage">The storage mechanism to use</param>
 		public static void Initialise(ISessionFactory factory, IUnitOfWorkStorage storage)
 		{
-			m_factory = factory;
-			m_storage = storage;
+			m_sessionFactory = factory;
+			Storage = storage;
 		}
 
 		/// <summary>
@@ -74,9 +88,9 @@ namespace Triggerfish.NHibernate
 
 			if (null == uow || !uow.IsActive)
 			{
-				uow = new UnitOfWork(m_factory.OpenSession());
+				uow = new UnitOfWork(m_sessionFactory.OpenSession());
 				uow.Begin();
-				m_storage.SetCurrentUnitOfWork(uow);
+				Storage.SetCurrentUnitOfWork(uow);
 			}
 
 			return uow.Session;
@@ -88,7 +102,7 @@ namespace Triggerfish.NHibernate
 		/// <returns>The current unit of work object</returns>
 		public static IUnitOfWork GetCurrentUnitOfWork()
 		{
-			return m_storage.GetCurrentUnitOfWork();
+			return Storage.GetCurrentUnitOfWork();
 		}
 
 		/// <summary>
@@ -100,7 +114,7 @@ namespace Triggerfish.NHibernate
 			if (null != uow)
 			{
 				uow.End();
-				m_storage.DeleteCurrentUnitOfWork();
+				Storage.DeleteCurrentUnitOfWork();
 			}
 		}
 

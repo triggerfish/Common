@@ -17,6 +17,53 @@ namespace Triggerfish.NHibernate.Tests
 		Mock<ISessionFactory> m_sessionFactory = new Mock<ISessionFactory>();
 		Mock<IUnitOfWorkStorage> m_storage = new Mock<IUnitOfWorkStorage>();
 
+		#region Initialise tests
+
+		[TestMethod]
+		public void ShouldCreateSimpleSessionStorage()
+		{
+			// arrange
+
+			// act
+			UnitOfWorkFactory.Initialise(m_sessionFactory.Object, UnitOfWorkStorageType.Simple);
+
+			// assert
+			Assert.IsTrue(UnitOfWorkFactory.Storage is SimpleSessionStorage);
+		}
+
+		[TestMethod]
+		public void ShouldCreateWebSessionStorage()
+		{
+			// arrange
+
+			// act
+			UnitOfWorkFactory.Initialise(m_sessionFactory.Object, UnitOfWorkStorageType.Web);
+
+			// assert
+			Assert.IsTrue(UnitOfWorkFactory.Storage is WebSessionStorage);
+		}
+
+		[TestMethod]
+		public void ShouldThrowIfInvalidStorageSpecified()
+		{
+			// arrange
+
+			// act
+			try
+			{
+				UnitOfWorkFactory.Initialise(m_sessionFactory.Object, (UnitOfWorkStorageType)57);
+			}
+			catch (ArgumentOutOfRangeException)
+			{
+				return;
+			}
+
+			// assert
+			Assert.Fail("Exception not thrown from Initialise for invalid storage type");
+		}
+
+		#endregion
+
 		#region GetCurrentSession tests
 
 		[TestMethod]
@@ -106,10 +153,9 @@ namespace Triggerfish.NHibernate.Tests
 			// arrange 
 			Mock<IUnitOfWork> expected = new Mock<IUnitOfWork>();
 			m_storage.Setup(x => x.GetCurrentUnitOfWork()).Returns(expected.Object);
-			UnitOfWorkFactory factory = new UnitOfWorkFactory();
 
 			// act
-			IUnitOfWork uow = factory.GetCurrentUnitOfWork();
+			IUnitOfWork uow = UnitOfWorkFactory.GetCurrentUnitOfWork();
 
 			// assert
 			Assert.IsTrue(ReferenceEquals(expected.Object, uow));
@@ -126,10 +172,9 @@ namespace Triggerfish.NHibernate.Tests
 			// arrange 
 			Mock<IUnitOfWork> expected = new Mock<IUnitOfWork>();
 			m_storage.Setup(x => x.GetCurrentUnitOfWork()).Returns(expected.Object);
-			UnitOfWorkFactory factory = new UnitOfWorkFactory();
 
 			// act
-			factory.CloseCurrentUnitOfWork();
+			UnitOfWorkFactory.CloseCurrentUnitOfWork();
 
 			// assert
 			expected.Verify(x => x.End());
@@ -141,10 +186,9 @@ namespace Triggerfish.NHibernate.Tests
 		{
 			// arrange 
 			m_storage.Setup(x => x.GetCurrentUnitOfWork()).Returns<IUnitOfWork>(null);
-			UnitOfWorkFactory factory = new UnitOfWorkFactory();
 
 			// act
-			factory.CloseCurrentUnitOfWork();
+			UnitOfWorkFactory.CloseCurrentUnitOfWork();
 
 			// assert
 			m_storage.Verify(x => x.DeleteCurrentUnitOfWork(), Times.Never());

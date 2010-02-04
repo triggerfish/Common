@@ -58,6 +58,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="SimpleSessionStorageTests.cs" />
     <Compile Include="UnitOfWorkFactoryTests.cs" />
     <Compile Include="UnitOfWorkTests.cs" />
     <Compile Include="RepositoryTests.cs" />
