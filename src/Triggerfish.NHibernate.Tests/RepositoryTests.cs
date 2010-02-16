@@ -25,10 +25,10 @@ namespace Triggerfish.NHibernate.Tests
 			string expected = "TestObject";
 			m_session.Setup(x => x.Get<string>(id)).Returns(expected);
 
-			Repository r = new Repository(m_session.Object);
+			Repository<string> r = new Repository<string>(m_session.Object);
 
 			// act
-			string s = r.Get<string>(id);			
+			string s = r.Get(id);			
 
 			// assert
 			Assert.AreEqual(expected, s);
@@ -40,10 +40,10 @@ namespace Triggerfish.NHibernate.Tests
 			// arrange 
 			m_session.Setup(x => x.Get<string>(It.IsAny<object>())).Returns<string>(null);
 
-			Repository r = new Repository(m_session.Object);
+			Repository<string> r = new Repository<string>(m_session.Object);
 
 			// act
-			string s = r.Get<string>(1);
+			string s = r.Get(1);
 
 			// assert
 			Assert.AreEqual(null, s);
@@ -53,11 +53,11 @@ namespace Triggerfish.NHibernate.Tests
 		public void ShouldDelete()
 		{
 			// arrange 
-			Repository r = new Repository(m_session.Object);
+			Repository<string> r = new Repository<string>(m_session.Object);
 			string s = "this";
 
 			// act
-			r.Delete<string>(s);
+			r.Delete(s);
 
 			// assert
 			m_session.Verify(x => x.Delete((object)s));
@@ -67,11 +67,11 @@ namespace Triggerfish.NHibernate.Tests
 		public void ShouldSave()
 		{
 			// arrange 
-			Repository r = new Repository(m_session.Object);
+			Repository<string> r = new Repository<string>(m_session.Object);
 			string s = "this";
 
 			// act
-			r.Save<string>(s);
+			r.Save(s);
 
 			// assert
 			m_session.Verify(x => x.SaveOrUpdate((object)s));
@@ -81,11 +81,11 @@ namespace Triggerfish.NHibernate.Tests
 		public void ShouldSaveAll()
 		{
 			// arrange 
-			Repository r = new Repository(m_session.Object);
-			string[] s = new string[] {"this", "that"};
+			Repository<string> r = new Repository<string>(m_session.Object);
+			string[] s = new string[] { "this", "that" };
 
 			// act
-			r.Save<string>(s);
+			r.Save(s);
 
 			// assert
 			m_session.Verify(x => x.SaveOrUpdate(It.IsAny<object>()), Times.Exactly(2));

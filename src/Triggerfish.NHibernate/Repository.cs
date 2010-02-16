@@ -12,9 +12,9 @@ using Triggerfish.Linq;
 namespace Triggerfish.NHibernate
 {
 	/// <summary>
-	/// Represents an NHibernate repository
+	/// Represents an NHibernate repository fr a specific type
 	/// </summary>
-	public class Repository
+	public class Repository<T>
 	{
 		/// <summary>
 		/// The NHibernate session
@@ -33,10 +33,9 @@ namespace Triggerfish.NHibernate
 		/// <summary>
 		/// Get an object from the objects ID
 		/// </summary>
-		/// <typeparam name="T">Object type</typeparam>
 		/// <param name="id">Object ID</param>
 		/// <returns>The object</returns>
-		public virtual T Get<T>(int id)
+		public virtual T Get(int id)
 		{
 			return Session.Get<T>(id);
 		}
@@ -44,9 +43,8 @@ namespace Triggerfish.NHibernate
 		/// <summary>
 		/// Get a queryable list of objects
 		/// </summary>
-		/// <typeparam name="T">Object type</typeparam>
 		/// <returns>The objects</returns>
-		public virtual IOrderedQueryable<T> GetAll<T>()
+		public virtual IOrderedQueryable<T> GetAll()
 		{
 			return Session.Linq<T>();
 		}
@@ -54,9 +52,8 @@ namespace Triggerfish.NHibernate
 		/// <summary>
 		/// Deletes an object from the repository
 		/// </summary>
-		/// <typeparam name="T">Object type</typeparam>
 		/// <param name="target">the object</param>
-		public virtual void Delete<T>(T target)
+		public virtual void Delete(T target)
 		{
 			Session.Delete(target);
 		}
@@ -64,9 +61,8 @@ namespace Triggerfish.NHibernate
 		/// <summary>
 		/// Saves or updates an object to the repository
 		/// </summary>
-		/// <typeparam name="T">Object type</typeparam>
 		/// <param name="target">The object to save or update</param>
-		public virtual void Save<T>(T target)
+		public virtual void Save(T target)
 		{
 			Session.SaveOrUpdate(target);
 		}
@@ -74,9 +70,8 @@ namespace Triggerfish.NHibernate
 		/// <summary>
 		/// Saves or updates a list of objects to the repository
 		/// </summary>
-		/// <typeparam name="T">Object type</typeparam>
 		/// <param name="targets">The list of objects to save or update</param>
-		public virtual void Save<T>(IEnumerable<T> targets)
+		public virtual void Save(IEnumerable<T> targets)
 		{
 			IEnumerable<object> objs = targets.Cast<object>();
 			objs.ForEach(o => Session.SaveOrUpdate(o));
