@@ -64,31 +64,63 @@ namespace Triggerfish.NHibernate.Tests
 		}
 
 		[TestMethod]
-		public void ShouldSave()
+		public void ShouldInsert()
 		{
 			// arrange 
 			Repository<string> r = new Repository<string>(m_session.Object);
 			string s = "this";
 
 			// act
-			r.Save(s);
+			r.Insert(s);
 
 			// assert
-			m_session.Verify(x => x.SaveOrUpdate((object)s));
+			m_session.Verify(x => x.Save((object)s));
 		}
 
 		[TestMethod]
-		public void ShouldSaveAll()
+		public void ShouldInsertAll()
 		{
 			// arrange 
 			Repository<string> r = new Repository<string>(m_session.Object);
 			string[] s = new string[] { "this", "that" };
 
 			// act
-			r.Save(s);
+			r.Insert(s);
 
 			// assert
-			m_session.Verify(x => x.SaveOrUpdate(It.IsAny<object>()), Times.Exactly(2));
+			m_session.Verify(x => x.Save(It.IsAny<object>()), Times.Exactly(2));
+		}
+
+		[TestMethod]
+		public void ShouldUpdate()
+		{
+			// arrange 
+			Repository<string> r = new Repository<string>(m_session.Object);
+			string s = "this"; 
+
+			// act - we're actually doing an insert here because the string has not
+			// already been persisted. however, it's irrelevant as we're mocking the
+			// session and don't actually go anywhere near NHibernate code
+			r.Update(s);
+
+			// assert
+			m_session.Verify(x => x.Update((object)s));
+		}
+
+		[TestMethod]
+		public void ShouldUpdateAll()
+		{
+			// arrange 
+			Repository<string> r = new Repository<string>(m_session.Object);
+			string[] s = new string[] { "this", "that" };
+
+			// act - we're actually doing an insert here because the string has not
+			// already been persisted. however, it's irrelevant as we're mocking the
+			// session and don't actually go anywhere near NHibernate code
+			r.Update(s);
+
+			// assert
+			m_session.Verify(x => x.Update(It.IsAny<object>()), Times.Exactly(2));
 		}
 
 		[TestInitialize]

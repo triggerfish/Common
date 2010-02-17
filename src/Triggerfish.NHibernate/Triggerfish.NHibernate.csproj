@@ -80,6 +80,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IRepository.cs" />
     <Compile Include="SimpleSessionStorage.cs" />
     <Compile Include="WebSessionStorage.cs" />
     <Compile Include="UnitOfWorkFactory.cs" />

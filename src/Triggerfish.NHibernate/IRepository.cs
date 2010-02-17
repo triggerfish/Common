@@ -14,88 +14,56 @@ namespace Triggerfish.NHibernate
 	/// <summary>
 	/// Represents an NHibernate repository fr a specific type
 	/// </summary>
-	public class Repository<T> : IRepository<T>
+	public interface IRepository<T>
 	{
 		/// <summary>
 		/// The NHibernate session
 		/// </summary>
-		public ISession Session { get; private set; }
-
-		/// <summary>
-		/// Constructor
-		/// </summary>
-		/// <param name="session">A NHibernate session</param>
-		public Repository(ISession session)
-		{
-		    Session = session;
-		}
+		ISession Session { get; }
 
 		/// <summary>
 		/// Get an object from the objects ID
 		/// </summary>
 		/// <param name="id">Object ID</param>
 		/// <returns>The object</returns>
-		public virtual T Get(int id)
-		{
-			return Session.Get<T>(id);
-		}
+		T Get(int id);
 
 		/// <summary>
 		/// Get a queryable list of objects
 		/// </summary>
 		/// <returns>The objects</returns>
-		public virtual IOrderedQueryable<T> GetAll()
-		{
-			return Session.Linq<T>();
-		}
+		IOrderedQueryable<T> GetAll();
 
 		/// <summary>
 		/// Deletes an object from the repository
 		/// </summary>
 		/// <param name="target">the object</param>
-		public virtual void Delete(T target)
-		{
-			Session.Delete(target);
-		}
+		void Delete(T target);
 
 		/// <summary>
 		/// Inserts a new transient object into the repository
 		/// </summary>
 		/// <param name="target">The object to insert</param>
-		public virtual void Insert(T target)
-		{
-			Session.Save(target);
-		}
+		void Insert(T target);
 
 		/// <summary>
 		/// Inserts a list of new transient object into the repository
 		/// </summary>
 		/// <param name="targets">The list of objects to insert</param>
-		public virtual void Insert(IEnumerable<T> targets)
-		{
-			IEnumerable<object> objs = targets.Cast<object>();
-			objs.ForEach(o => Session.Save(o));
-		}
+		void Insert(IEnumerable<T> targets);
 
 		/// <summary>
 		/// Updates an detached object. The object will be added to the current 
 		/// session and the database updated with the objects values
 		/// </summary>
 		/// <param name="target">The object to update</param>
-		public virtual void Update(T target)
-		{
-			Session.Update(target);
-		}
+		void Update(T target);
 
 		/// <summary>
 		/// Updates a list of detached object. The object will be added to the current 
 		/// session and the database updated with the objects values
 		/// </summary>
 		/// <param name="targets">The list of objects to update</param>
-		public virtual void Update(IEnumerable<T> targets)
-		{
-			IEnumerable<object> objs = targets.Cast<object>();
-			objs.ForEach(o => Session.Update(o));
-		}
+		void Update(IEnumerable<T> targets);
 	}
 }
