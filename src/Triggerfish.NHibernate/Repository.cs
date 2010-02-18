@@ -31,6 +31,14 @@ namespace Triggerfish.NHibernate
 		}
 
 		/// <summary>
+		/// Gets the number of entities in the database table
+		/// </summary>
+		public virtual int Count
+		{
+			get { return GetAll().Count(); }
+		}
+
+		/// <summary>
 		/// Get an object from the objects ID
 		/// </summary>
 		/// <param name="id">Object ID</param>
@@ -44,7 +52,7 @@ namespace Triggerfish.NHibernate
 		/// Get a queryable list of objects
 		/// </summary>
 		/// <returns>The objects</returns>
-		public virtual IOrderedQueryable<T> GetAll()
+		public virtual INHibernateQueryable<T> GetAll()
 		{
 			return Session.Linq<T>();
 		}

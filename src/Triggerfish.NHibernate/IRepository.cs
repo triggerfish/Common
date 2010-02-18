@@ -32,7 +32,7 @@ namespace Triggerfish.NHibernate
 		/// Get a queryable list of objects
 		/// </summary>
 		/// <returns>The objects</returns>
-		IOrderedQueryable<T> GetAll();
+		INHibernateQueryable<T> GetAll();
 
 		/// <summary>
 		/// Deletes an object from the repository
