@@ -1,20 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.IO;
-using NHibernate;
 using NHibernate.Linq;
-using Triggerfish.NHibernate;
-using NHibernate.Validator.Exceptions;
-using Triggerfish.Linq;
+using NHibernate;
 
 namespace Triggerfish.NHibernate
 {
 	/// <summary>
 	/// Represents an NHibernate repository fr a specific type
 	/// </summary>
-	public interface IRepository<T>
+	public interface IRepository<T> where T : class
 	{
 		/// <summary>
 		/// The NHibernate session

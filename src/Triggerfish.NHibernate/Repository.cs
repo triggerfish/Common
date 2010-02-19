@@ -1,20 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.IO;
 using NHibernate;
 using NHibernate.Linq;
-using Triggerfish.NHibernate;
-using NHibernate.Validator.Exceptions;
 using Triggerfish.Linq;
+using Triggerfish.Database;
 
 namespace Triggerfish.NHibernate
 {
 	/// <summary>
 	/// Represents an NHibernate repository fr a specific type
 	/// </summary>
-	public class Repository<T> : IRepository<T>
+	public class Repository<T> : IRepository<T> where T : class
 	{
 		/// <summary>
 		/// The NHibernate session
@@ -46,6 +43,15 @@ namespace Triggerfish.NHibernate
 		public virtual T Get(int id)
 		{
 			return Session.Get<T>(id);
+		}
+
+		/// <summary>
+		/// Returns a repository query to use to get an object
+		/// </summary>
+		/// <returns>The query</returns>
+		public virtual IRepositoryQuery<T> Get()
+		{
+			return new RepositoryQuery<T>(Session);
 		}
 
 		/// <summary>

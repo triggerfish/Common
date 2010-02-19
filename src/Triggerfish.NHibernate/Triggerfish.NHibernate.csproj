@@ -80,6 +80,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="RepositoryQuery.cs" />
+    <Compile Include="IRepositoryQuery.cs" />
     <Compile Include="NHibernateQueryableExtensions.cs" />
     <Compile Include="FKConstraintNameConvention.cs" />
     <Compile Include="ExportSchema.cs" />
