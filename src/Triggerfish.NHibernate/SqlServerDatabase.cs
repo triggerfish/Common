@@ -7,7 +7,7 @@ namespace Triggerfish.NHibernate
 	/// <summary>
 	/// SQL Server database configuration
 	/// </summary>
-	public class SqlServerModule : IDatabaseConfiguration
+	public class SqlServerDatabase : IDatabaseConfiguration
     {
 		private readonly string m_server;
 		private readonly string m_database;
@@ -17,7 +17,7 @@ namespace Triggerfish.NHibernate
 		/// </summary>
 		/// <param name="server">The path to the server</param>
 		/// <param name="database">The name of the database</param>
-		public SqlServerModule(string server, string database)
+		public SqlServerDatabase(string server, string database)
 		{
 			m_server = server;
 			m_database = database;
