@@ -80,6 +80,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FKConstraintNameConvention.cs" />
+    <Compile Include="ExportSchema.cs" />
+    <Compile Include="ISchemaExporter.cs" />
     <Compile Include="IRepository.cs" />
     <Compile Include="SimpleSessionStorage.cs" />
     <Compile Include="WebSessionStorage.cs" />
@@ -88,7 +91,7 @@
     <Compile Include="UnitOfWork.cs" />
     <Compile Include="Configuration.cs" />
     <Compile Include="SqliteDatabase.cs" />
-    <Compile Include="SqlServerConfiguration.cs" />
+    <Compile Include="SqlServerDatabase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository.cs" />
     <Compile Include="SQLlogger.cs" />

@@ -43,7 +43,8 @@ namespace Triggerfish.NHibernate
 
 			Config = Fluently.Configure()
 						.Database(m_database.Create(typeof(T).Assembly))
-						.Mappings(m => m.FluentMappings.AddFromAssemblyOf<T>());
+						.Mappings(m => m.FluentMappings.AddFromAssemblyOf<T>()
+										.Conventions.Add(typeof(FKConstraintNameConvention)));
 		}
 
 		/// <summary>
