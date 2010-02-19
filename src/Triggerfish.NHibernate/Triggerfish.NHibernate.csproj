@@ -80,6 +80,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="NHibernateQueryableExtensions.cs" />
     <Compile Include="FKConstraintNameConvention.cs" />
     <Compile Include="ExportSchema.cs" />
     <Compile Include="ISchemaExporter.cs" />
