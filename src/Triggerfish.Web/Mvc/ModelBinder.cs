@@ -13,12 +13,15 @@ namespace Triggerfish.Web.Mvc
 	/// <typeparam name="T">The type of data to bind</typeparam>
 	public abstract class ModelBinder<T> : IModelBinder where T : class
 	{
-		private ModelBindingContext m_context;
+		/// <summary>
+		/// The model binding context
+		/// </summary>
+		protected ModelBindingContext Context { get; private set; }
 
 		/// <summary>
 		/// The name of the data model
 		/// </summary>
-		protected string ModelName { get { return m_context.ModelName; } }
+		protected string ModelName { get { return Context.ModelName; } }
 
 		/// <summary>
 		/// Bind the incoming data to the model object. IModelBinder implementation
@@ -29,7 +32,7 @@ namespace Triggerfish.Web.Mvc
 		public object BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext)
 		{
 			// The action method argument
-			m_context = bindingContext;
+			Context = bindingContext;
 
 			try
 			{
@@ -61,19 +64,19 @@ namespace Triggerfish.Web.Mvc
 			ValueProviderResult v;
 
 			// first try with the prefix
-			string k = m_context.ModelName + "." + key;
-			bool gotIt = m_context.ValueProvider.TryGetValue(k, out v);
+			string k = Context.ModelName + "." + key;
+			bool gotIt = Context.ValueProvider.TryGetValue(k, out v);
 
 			// if that failed, try with the raw name (unless the model has the Bind(Prefix = XXX) attribute specified)
-			if (!gotIt && m_context.FallbackToEmptyPrefix)
+			if (!gotIt && Context.FallbackToEmptyPrefix)
 			{
 				k = key;
-				gotIt = m_context.ValueProvider.TryGetValue(k, out v);
+				gotIt = Context.ValueProvider.TryGetValue(k, out v);
 			}
 
 			if (gotIt)
 			{
-				m_context.ModelState.SetModelValue(k, v);
+				Context.ModelState.SetModelValue(k, v);
 
 				if (!mustHaveValue || !String.IsNullOrEmpty(v.AttemptedValue))
 				{
