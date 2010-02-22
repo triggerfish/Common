@@ -51,6 +51,8 @@
     <Compile Include="Database\IUnitOfWorkStorage.cs" />
     <Compile Include="Database\IUnitOfWork.cs" />
     <Compile Include="Database\UnitOfWorkStorageType.cs" />
+    <Compile Include="Linq\MemberPathVisitor.cs" />
+    <Compile Include="Linq\ExpressionVisitor.cs" />
     <Compile Include="Security\BCrypt.cs" />
     <Compile Include="Security\BCryptEncryptor.cs" />
     <Compile Include="Security\IEncryptor.cs" />
