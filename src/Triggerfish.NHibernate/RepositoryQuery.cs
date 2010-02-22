@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using NHibernate;
 using NHibernate.Criterion;
 using Triggerfish.Database;
+using Triggerfish.Linq;
 
 namespace Triggerfish.NHibernate
 {
@@ -48,10 +49,9 @@ namespace Triggerfish.NHibernate
 		/// <returns>The amended query</returns>
 		public IRepositoryQuery<T> With(Expression<Func<T, object>> path)
 		{
-			if (path.Body.NodeType == ExpressionType.MemberAccess)
-			{
-				m_criteria.SetFetchMode(((MemberExpression)path.Body).Member.Name, FetchMode.Eager);
-			}
+			PropertyPathVisitor visitor = new PropertyPathVisitor();
+			visitor.Visit(path);
+			m_criteria.SetFetchMode(visitor.Path, FetchMode.Eager);
 			return this;
 		}
 

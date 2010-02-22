@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Linq.Expressions;
 using NHibernate.Linq;
+using Triggerfish.Linq;
 
 namespace Triggerfish.NHibernate
 {
@@ -19,10 +20,9 @@ namespace Triggerfish.NHibernate
 		/// <returns>An amended INHibernateQueryable</returns>
 		public static INHibernateQueryable<TObj> With<TObj>(this INHibernateQueryable<TObj> query, Expression<Func<TObj, object>> path)
 		{
-			if (path.Body.NodeType == ExpressionType.MemberAccess)
-			{
-				query.QueryOptions.AddExpansion(((MemberExpression)path.Body).Member.Name);
-			}
+			PropertyPathVisitor visitor = new PropertyPathVisitor();
+			visitor.Visit(path);
+			query.QueryOptions.AddExpansion(visitor.Path);
 			return query;
 		}
 	}
