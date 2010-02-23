@@ -16,12 +16,17 @@ namespace Triggerfish.Web.Mvc
 		/// <summary>
 		/// The model binding context
 		/// </summary>
-		protected ModelBindingContext Context { get; private set; }
+		protected ControllerContext ControllerContext { get; private set; }
+
+		/// <summary>
+		/// The model binding context
+		/// </summary>
+		protected ModelBindingContext BindingContext { get; private set; }
 
 		/// <summary>
 		/// The name of the data model
 		/// </summary>
-		protected string ModelName { get { return Context.ModelName; } }
+		protected string ModelName { get { return BindingContext.ModelName; } }
 
 		/// <summary>
 		/// Bind the incoming data to the model object. IModelBinder implementation
@@ -31,8 +36,8 @@ namespace Triggerfish.Web.Mvc
 		/// <returns>The object</returns>
 		public object BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext)
 		{
-			// The action method argument
-			Context = bindingContext;
+			ControllerContext = controllerContext;
+			BindingContext = bindingContext;
 
 			try
 			{
@@ -64,19 +69,19 @@ namespace Triggerfish.Web.Mvc
 			ValueProviderResult v;
 
 			// first try with the prefix
-			string k = Context.ModelName + "." + key;
-			bool gotIt = Context.ValueProvider.TryGetValue(k, out v);
+			string k = BindingContext.ModelName + "." + key;
+			bool gotIt = BindingContext.ValueProvider.TryGetValue(k, out v);
 
 			// if that failed, try with the raw name (unless the model has the Bind(Prefix = XXX) attribute specified)
-			if (!gotIt && Context.FallbackToEmptyPrefix)
+			if (!gotIt && BindingContext.FallbackToEmptyPrefix)
 			{
 				k = key;
-				gotIt = Context.ValueProvider.TryGetValue(k, out v);
+				gotIt = BindingContext.ValueProvider.TryGetValue(k, out v);
 			}
 
 			if (gotIt)
 			{
-				Context.ModelState.SetModelValue(k, v);
+				BindingContext.ModelState.SetModelValue(k, v);
 
 				if (!mustHaveValue || !String.IsNullOrEmpty(v.AttemptedValue))
 				{
@@ -86,7 +91,7 @@ namespace Triggerfish.Web.Mvc
 
 			if (mustHaveValue)
 			{
-				throw new ValidationException(key, String.Format("{0} must be specified", key));
+				throw new ValidationException(key, "This field is required");
 			}
 
 			return null;
