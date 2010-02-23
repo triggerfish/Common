@@ -80,13 +80,7 @@ namespace Triggerfish.Web.Mvc.Testing
 			}
 
 			RouteCollection routes = new RouteCollection();
-			try
-			{
-				RouteValues = InboundRoutingHelpers.GenerateInboundRoute(url, registerRoutes);
-			}
-			catch (Exception)
-			{
-			}
+			RouteValues = InboundRoutingHelpers.GenerateInboundRoute(url, registerRoutes);
 		}
 
 		/// <summary>
