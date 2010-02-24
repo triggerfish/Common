@@ -48,14 +48,14 @@ namespace Triggerfish.Linq
 		/// <param name="member">A method access expression</param>
 		protected override void VisitMemberAccess(MemberExpression member)
 		{
+			base.VisitMemberAccess(member);
+
 			if (member.Member.MemberType != MemberTypes.Property)
 			{
 				throw new NotSupportedException(String.Format("{0} calls are not supported, only property access is allowed", member.Member.MemberType.ToString()));
 			}
 
 			m_paths.Add(member.Member.Name);
-
-			base.VisitMemberAccess(member);
 		}
 	}
 }
