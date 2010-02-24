@@ -47,10 +47,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Currency.cs" />
     <Compile Include="Database\IUnitOfWorkFactory.cs" />
     <Compile Include="Database\IUnitOfWorkStorage.cs" />
     <Compile Include="Database\IUnitOfWork.cs" />
     <Compile Include="Database\UnitOfWorkStorageType.cs" />
+    <Compile Include="Maths.cs" />
     <Compile Include="Linq\MemberPathVisitor.cs" />
     <Compile Include="Linq\ExpressionVisitor.cs" />
     <Compile Include="Security\BCrypt.cs" />

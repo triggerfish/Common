@@ -38,6 +38,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CurrencyTests.cs" />
+    <Compile Include="MathsTests.cs" />
     <Compile Include="Security\BCryptEncryptorTests.cs" />
     <Compile Include="Database\EntityTests.cs" />
     <Compile Include="Linq\IEnumerableExtensionsTests.cs" />
