@@ -22,7 +22,7 @@ namespace Triggerfish.Web.Mvc.Testing
 		/// <returns>The route values</returns>
 		public static RouteValueDictionary GenerateInboundRoute(string url, Route route)
 		{
-			HttpContextBase mockHttp = HttpHelpers.MockHttpContext(url);
+			HttpContextBase mockHttp = MockHelpers.HttpContext(url).Object;
 			RouteData data = route.GetRouteData(mockHttp);
 			if (null != data)
 			{
@@ -44,7 +44,7 @@ namespace Triggerfish.Web.Mvc.Testing
 			RouteCollection routes = new RouteCollection();
 			registerRoutes(routes);
 
-			HttpContextBase mockHttp = HttpHelpers.MockHttpContext(url);
+			HttpContextBase mockHttp = MockHelpers.HttpContext(url).Object;
 
 			RouteData data = routes.GetRouteData(mockHttp);
 			if (null != data)

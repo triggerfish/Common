@@ -9,13 +9,13 @@ using System.Web;
 namespace Triggerfish.Testing.Tests
 {
 	[TestClass]
-	public class HttpHelperTests
+	public class MockHelperTests
 	{
 		[TestMethod]
 		public void ShouldCreateMockHttpContext()
 		{
 			string url = "http://www.a.com/b";
-			HttpContextBase context = HttpHelpers.MockHttpContext(url);
+			HttpContextBase context = MockHelpers.HttpContext(url).Object;
 			Assert.AreNotEqual(null, context.Request);
 			Assert.AreEqual(url, context.Request.AppRelativeCurrentExecutionFilePath);
 			Assert.AreNotEqual(null, context.Response);

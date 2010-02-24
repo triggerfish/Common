@@ -113,8 +113,9 @@ namespace Triggerfish.Web.Mvc.Testing
 
 					if (null != mi)
 					{
-						AuthorizeAttribute[] attrs = (AuthorizeAttribute[])mi.GetCustomAttributes(typeof(AuthorizeAttribute), false);
-						return attrs.Length == 1;
+						AuthorizeAttribute[] microsoftAttrs = (AuthorizeAttribute[])mi.GetCustomAttributes(typeof(AuthorizeAttribute), false);
+						AuthoriseAttribute[] triggerfishAttrs = (AuthoriseAttribute[])mi.GetCustomAttributes(typeof(AuthoriseAttribute), false);
+						return (microsoftAttrs.Length > 0) || (triggerfishAttrs.Length > 0);
 					}
 				}
 			}

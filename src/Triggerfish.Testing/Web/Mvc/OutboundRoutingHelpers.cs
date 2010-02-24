@@ -55,7 +55,7 @@ namespace Triggerfish.Web.Mvc.Testing
 		/// <returns>The virtual path data object</returns>
 		public static VirtualPathData GenerateOutboundVirtualPath(RouteValueDictionary routeValues, Route route)
 		{
-			HttpContextBase mockHttp = HttpHelpers.MockHttpContext(null);
+			HttpContextBase mockHttp = MockHelpers.HttpContext(null).Object;
 			RequestContext context = new RequestContext(mockHttp, new RouteData());
 
 			// Act (generate a URL)
@@ -111,7 +111,7 @@ namespace Triggerfish.Web.Mvc.Testing
 			RouteCollection routeConfig = new RouteCollection();
 			registerRoutes(routeConfig);
 
-			HttpContextBase mockHttp = HttpHelpers.MockHttpContext(null);
+			HttpContextBase mockHttp = MockHelpers.HttpContext(null).Object;
 			RequestContext context = new RequestContext(mockHttp, new RouteData());
 
 			// Act (generate a URL)

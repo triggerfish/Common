@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using Triggerfish.Web.Mvc.Testing;
 using Triggerfish.Web.Routing.Testing;
+using Triggerfish.Web.Mvc;
 
 namespace Triggerfish.Testing.Tests
 {
@@ -75,11 +76,27 @@ namespace Triggerfish.Testing.Tests
 		}
 
 		[TestMethod]
-		public void ShouldGetAuthoriseRequired()
+		public void ShouldGetAuthorizeRequired()
 		{
 			RouteInformation ri = new RouteInformation("/Artists", RegisterRoutes);
 
 			Assert.IsTrue(ri.DoesActionRequireAuthorisation());
+		}
+
+		[TestMethod]
+		public void ShouldGetAuthoriseRequired()
+		{
+			RouteInformation ri = new RouteInformation("/Home", RegisterRoutes);
+
+			Assert.IsTrue(ri.DoesActionRequireAuthorisation());
+		}
+
+		[TestMethod]
+		public void ShouldNotGetAuthoriseRequired()
+		{
+			RouteInformation ri = new RouteInformation("/Test", RegisterRoutes);
+
+			Assert.IsFalse(ri.DoesActionRequireAuthorisation());
 		}
 
 		private static void RegisterRoutes(RouteCollection routes)
@@ -89,6 +106,16 @@ namespace Triggerfish.Testing.Tests
 				"Artists/{genre}",
 				new { controller = "Artists", Action = "List", genre = "All" }
 			);
+			routes.MapRoute(
+				null,
+				"Home",
+				new { controller = "Artists", Action = "Index" }
+			);
+			routes.MapRoute(
+				null,
+				"Test",
+				new { controller = "Artists", Action = "Test" }
+			);
 		}
 	}
 
@@ -96,6 +123,17 @@ namespace Triggerfish.Testing.Tests
 	{
 		[Authorize()]
 		public ActionResult List(string genre)
+		{
+			return null;
+		}
+	
+		[Authorise()]
+		public ActionResult Index()
+		{
+			return null;
+		}
+	
+		public ActionResult Test()
 		{
 			return null;
 		}
