@@ -22,7 +22,7 @@ namespace Triggerfish.Web.Testing
 		/// <returns>The updated context mock</returns>
 		public static Mock<HttpContextBase> WithSession(this Mock<HttpContextBase> context, Mock<HttpSessionStateBase> session)
 		{
-			context.Setup(x => x.Session).Returns(session.Object);
+			context.Setup(x => x.Session).Returns(session == null ? null : session.Object);
 			return context;
 		}
 
@@ -34,7 +34,7 @@ namespace Triggerfish.Web.Testing
 		/// <returns>The updated context mock</returns>
 		public static Mock<HttpContextBase> WithUser(this Mock<HttpContextBase> context, Mock<IPrincipal> user)
 		{
-			context.Setup(x => x.User).Returns(user.Object);
+			context.Setup(x => x.User).Returns(user == null ? null : user.Object);
 			return context;
 		}
 
@@ -59,8 +59,20 @@ namespace Triggerfish.Web.Testing
 		/// <returns>The updated user mock</returns>
 		public static Mock<IPrincipal> WithIdentity(this Mock<IPrincipal> user, Mock<IIdentity> identity)
 		{
-			user.Setup(x => x.Identity).Returns(identity.Object);
+			user.Setup(x => x.Identity).Returns(identity == null ? null : identity.Object);
 			return user;
+		}
+
+		/// <summary>
+		/// Updates an identity mock with the users name
+		/// </summary>
+		/// <param name="identity">The identity mock</param>
+		/// <param name="name">The users name</param>
+		/// <returns>The identity user mock</returns>
+		public static Mock<IIdentity> WithName(this Mock<IIdentity> identity, string name)
+		{
+			identity.Setup(x => x.Name).Returns(name);
+			return identity;
 		}
 	
 		/// <summary>
