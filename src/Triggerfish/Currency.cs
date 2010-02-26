@@ -24,7 +24,7 @@ namespace Triggerfish
 		/// <summary>
 		/// Converts a raw decimal pence amount into pounds and pence
 		/// </summary>
-		/// <param name="rawAmount">Raw decimal pence amount</param>
+		/// <param name="rawPence">Raw decimal pence amount</param>
 		/// <returns>The number of whole pounds and pennies</returns>
 		public static decimal ToPoundsAndPence(decimal rawPence)
 		{

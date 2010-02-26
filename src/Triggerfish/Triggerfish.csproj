@@ -47,6 +47,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Collections\Generic\IReadOnlyList.cs" />
+    <Compile Include="Collections\Generic\List.cs" />
     <Compile Include="Currency.cs" />
     <Compile Include="Database\IUnitOfWorkFactory.cs" />
     <Compile Include="Database\IUnitOfWorkStorage.cs" />
