@@ -45,6 +45,9 @@ namespace Triggerfish.Web.Mvc
 			{
 				end = pageCount;
 				start = pageCount - pageLinksPerPageCount;
+
+				if (start < 0)
+					start = 0;
 			}
 
 			List<PageLink> pages = new List<PageLink>();

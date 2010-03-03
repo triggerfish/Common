@@ -30,6 +30,22 @@ namespace Triggerfish.Web.Tests
 		}
 
 		[TestMethod]
+		public void ShouldHaveCorrectIndexNumbersWhenLinksPerPageGreaterThanPages()
+		{
+			// arrange
+			PageLinkCentredAlgorithm alg = new PageLinkCentredAlgorithm();
+
+			// act
+			List<PageLink> links = alg.GetPages(0, 5, 6).ToList(); // gets all links
+
+			// assert
+			for (int i = 0; i < 5; i++)
+			{
+				Assert.AreEqual(i, links[i].Index);
+			}
+		}
+
+		[TestMethod]
 		public void ShouldOnlyHaveOneOfEachFlagSet()
 		{
 			// arrange
