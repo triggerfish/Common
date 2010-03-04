@@ -13,6 +13,39 @@ namespace Triggerfish.Web.Tests
 	public class ExportToTempDataAttributeTests
 	{
 		[TestMethod]
+		public void ShouldExportDataIfValidAndAcceptingAnyState()
+		{
+			// arrange
+			ActionExecutedContext context = new ActionExecutedContext();
+			MockController c = new MockController();
+			context.Controller = c;
+			MockExportAttribute attr = new MockExportAttribute("Test", EExportWhen.AnyModelState);
+
+			// act
+			attr.OnActionExecuted(context);
+
+			// assert
+			Assert.IsTrue(c.TempData.ContainsKey("Test"));
+		}
+
+		[TestMethod]
+		public void ShouldExportDataIfInvalidAndAcceptingAnyState()
+		{
+			// arrange
+			ActionExecutedContext context = new ActionExecutedContext();
+			MockController c = new MockController();
+			context.Controller = c;
+			c.ViewData.ModelState.AddModelError("", "Error");
+			MockExportAttribute attr = new MockExportAttribute("Test", EExportWhen.AnyModelState);
+
+			// act
+			attr.OnActionExecuted(context);
+
+			// assert
+			Assert.IsTrue(c.TempData.ContainsKey("Test"));
+		}
+
+		[TestMethod]
 		public void ShouldExportDataIfModelStateValid()
 		{
 			// arrange

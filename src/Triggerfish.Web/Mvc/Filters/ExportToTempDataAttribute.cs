@@ -13,6 +13,10 @@ namespace Triggerfish.Web.Mvc
 	public enum EExportWhen
 	{
 		/// <summary>
+		/// Export irrespective of the model state
+		/// </summary>
+		AnyModelState,
+		/// <summary>
 		/// Export the data if ModelState.IsValid is true
 		/// </summary>
 		ModelStateValid,
@@ -52,7 +56,8 @@ namespace Triggerfish.Web.Mvc
 		{
 			bool valid = filterContext.Controller.ViewData.ModelState.IsValid;
 			// only export when ModelState is valid
-			if (ExportWhen == EExportWhen.ModelStateValid && valid ||
+			if (ExportWhen == EExportWhen.AnyModelState ||
+				ExportWhen == EExportWhen.ModelStateValid && valid ||
 				ExportWhen == EExportWhen.ModelStateInvalid && !valid)
 			{
 				Set(filterContext, GetModel(filterContext.Controller));
