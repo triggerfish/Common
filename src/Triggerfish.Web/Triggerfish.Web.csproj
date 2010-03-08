@@ -55,6 +55,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IPostSubmitter.cs" />
     <Compile Include="Diagnostics\IDiagnostics.cs" />
     <Compile Include="Diagnostics\DiagnosticsResponseFilter.cs" />
     <Compile Include="Diagnostics\DiagnosticsModule.cs" />

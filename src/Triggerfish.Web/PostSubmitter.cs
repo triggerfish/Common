@@ -10,24 +10,9 @@ using System.IO;
 namespace Triggerfish.Web
 {
 	/// <summary>
-	/// Determines what type of post to perform.
-	/// </summary>
-	public enum PostTypeEnum
-	{
-		/// <summary>
-		/// Does a get against the source.
-		/// </summary>
-		Get,
-		/// <summary>
-		/// Does a post against the source.
-		/// </summary>
-		Post
-	}
-
-	/// <summary>
 	/// Submits post data to a url.
 	/// </summary>
-	public class PostSubmitter
+	public class PostSubmitter : IPostSubmitter
 	{
 		/// <summary>
 		/// Gets or sets the url to submit the post to.
