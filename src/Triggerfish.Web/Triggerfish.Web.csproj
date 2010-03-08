@@ -58,8 +58,10 @@
     <Compile Include="Diagnostics\IDiagnostics.cs" />
     <Compile Include="Diagnostics\DiagnosticsResponseFilter.cs" />
     <Compile Include="Diagnostics\DiagnosticsModule.cs" />
+    <Compile Include="Mvc\Binding\BinderResolver.cs" />
     <Compile Include="Mvc\Filters\AuthoriseAttribute.cs" />
     <Compile Include="Mvc\Binding\ModelBinder.cs" />
+    <Compile Include="Mvc\Filters\TransactionAttribute.cs" />
     <Compile Include="Mvc\Paging\PageLinkExtensions.cs" />
     <Compile Include="Mvc\Paging\FirstPrevNextLastPageLinkHtmlGenerator.cs" />
     <Compile Include="Mvc\HtmlHelpers.cs" />
@@ -77,6 +79,8 @@
     <Compile Include="Mvc\Paging\PageUrlGenerator.cs" />
     <Compile Include="Mvc\Filters\TempDataAttribute.cs" />
     <Compile Include="Mvc\ValidatorExtensions.cs" />
+    <Compile Include="PostSubmitter.cs" />
+    <Compile Include="QueryString.cs" />
     <Compile Include="Routing\RouteValueDictionaryExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Routing\FriendlyUrlRoute.cs" />

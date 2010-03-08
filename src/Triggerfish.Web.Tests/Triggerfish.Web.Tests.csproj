@@ -60,8 +60,10 @@
   <ItemGroup>
     <Compile Include="Diagnostics\DiagnosticModuleTest.cs" />
     <Compile Include="Diagnostics\DiagnosticsResponseFilterTest.cs" />
+    <Compile Include="Mvc\Binding\BinderResolverTests.cs" />
     <Compile Include="Mvc\Binding\ModelBinderTests.cs" />
     <Compile Include="Mvc\Filters\AuthoriseAttributeTests.cs" />
+    <Compile Include="Mvc\Filters\TransactionAttributeTests.cs" />
     <Compile Include="Mvc\ValidationExtensionsTests.cs" />
     <Compile Include="Mvc\Paging\FirstPrevNextLastPageLinkHtmlGeneratorTests.cs" />
     <Compile Include="Mvc\HtmlHelperTests.cs" />

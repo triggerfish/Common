@@ -88,6 +88,7 @@
     <Compile Include="ISchemaExporter.cs" />
     <Compile Include="IRepository.cs" />
     <Compile Include="SimpleSessionStorage.cs" />
+    <Compile Include="Testing\DatabaseTest.cs" />
     <Compile Include="WebSessionStorage.cs" />
     <Compile Include="UnitOfWorkFactory.cs" />
     <Compile Include="IDatabaseConfiguration.cs" />

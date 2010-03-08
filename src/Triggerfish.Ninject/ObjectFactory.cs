@@ -41,6 +41,17 @@ namespace Triggerfish.Ninject
 		}
 
 		/// <summary>
+		/// Gets a named object using Ninject
+		/// </summary>
+		/// <typeparam name="T">The type of object to get</typeparam>
+		/// <param name="name">The name of the object</param>
+		/// <returns>The object if successful, throws an exception if failed</returns>
+		public static T Get<T>(string name)
+		{
+			return Kernel.Get<T>(name);
+		}
+
+		/// <summary>
 		/// Trys to get an object using Ninject
 		/// </summary>
 		/// <typeparam name="T">The type of object to get</typeparam>
@@ -59,6 +70,17 @@ namespace Triggerfish.Ninject
 		public static T TryGet<T>(Type type)
 		{
 			return (T)Kernel.TryGet(type);
+		}
+
+		/// <summary>
+		/// Trys to get an object using Ninject
+		/// </summary>
+		/// <typeparam name="T">The type of object to get</typeparam>
+		/// <param name="name">The name of the object</param>
+		/// <returns>The object if successful, null if failed</returns>
+		public static T TryGet<T>(string name)
+		{
+			return Kernel.TryGet<T>(name);
 		}
 
 		/// <summary>
