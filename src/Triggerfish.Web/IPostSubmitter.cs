@@ -64,5 +64,13 @@ namespace Triggerfish.Web
 		/// <param name="postItems">The values to post.</param>
 		/// <returns>a string containing the result of the post.</returns>
 		string Post(string url, QueryString postItems);
+
+		/// <summary>
+		/// Posts the supplied data to specified url asyncronously.
+		/// </summary>
+		/// <param name="callback">Callback delegate</param>
+		/// <param name="state">Request state object</param>
+		/// <returns>An asynchronous result</returns>
+		IAsyncResult BeginPost(AsyncCallback callback, object state);
 	}
 }

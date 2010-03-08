@@ -92,12 +92,18 @@ namespace Triggerfish.Web
 		}
 
 		/// <summary>
-		/// Posts data to a specified url. Note that this assumes that you have already url encoded the post data.
+		/// Posts the supplied data to specified url asyncronously.
 		/// </summary>
-		/// <param name="postData">The data to post.</param>
-		/// <param name="url">the url to post to.</param>
-		/// <returns>Returns the result of the post.</returns>
-		private string PostData(string url, string postData)
+		/// <param name="callback">Callback delegate</param>
+		/// <param name="state">Request state object</param>
+		/// <returns>An asynchronous result</returns>
+		public IAsyncResult BeginPost(AsyncCallback callback, object state)
+		{
+			HttpWebRequest request = BuildRequest(Url, PostItems.ToString(Type));
+			return request.BeginGetResponse(callback, state);
+		}
+
+		private HttpWebRequest BuildRequest(string url, string postData)
 		{
 			HttpWebRequest request = null;
 			if (Type == PostTypeEnum.Post)
@@ -120,6 +126,14 @@ namespace Triggerfish.Web
 				request = (HttpWebRequest)WebRequest.Create(uri);
 				request.Method = "GET";
 			}
+
+			return request;
+		}
+
+		private string PostData(string url, string postData)
+		{
+			HttpWebRequest request = BuildRequest(url, postData);
+
 			string result = string.Empty;
 			using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
 			{
