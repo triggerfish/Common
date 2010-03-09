@@ -28,7 +28,7 @@ namespace Triggerfish.Web
 		/// <summary>
 		/// Overridden indexer to decode the value
 		/// </summary>
-		/// <param name="index">The key name</param>
+		/// <param name="name">The key name</param>
 		/// <returns>The decoded value</returns>
 		public new string this[string name]
 		{
