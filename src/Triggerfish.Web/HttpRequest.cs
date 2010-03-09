@@ -10,38 +10,38 @@ using System.IO;
 namespace Triggerfish.Web
 {
 	/// <summary>
-	/// Submits post data to a url.
+	/// Submits a HTTP request
 	/// </summary>
-	public class PostSubmitter : IPostSubmitter
+	public class HttpRequest : IHttpRequest
 	{
 		/// <summary>
-		/// Gets or sets the url to submit the post to.
+		/// Gets or sets the url to submit the request to
 		/// </summary>
 		public string Url { get; set; }
 
 		/// <summary>
-		/// Gets or sets the items to post.
+		/// Gets or sets the query/post parameters
 		/// </summary>
-		public QueryString PostItems { get; set; }
+		public QueryString Parameters { get; set; }
 
 		/// <summary>
-		/// Gets or sets the type of action to perform against the url.
+		/// Gets or sets the type of HTTP action to perform
 		/// </summary>
-		public PostTypeEnum Type { get; set; }
+		public HttpAction Action { get; set; }
 
 		/// <summary>
 		/// Default constructor.
 		/// </summary>
-		public PostSubmitter()
+		public HttpRequest()
 		{
-			Type = PostTypeEnum.Post;
+			Action = HttpAction.Post;
 		}
 
 		/// <summary>
 		/// Constructor that accepts a url as a parameter
 		/// </summary>
 		/// <param name="url">The url where the post will be submitted to.</param>
-		public PostSubmitter(string url)
+		public HttpRequest(string url)
 			: this()
 		{
 			Url = url;
@@ -52,43 +52,33 @@ namespace Triggerfish.Web
 		/// </summary>
 		/// <param name="url">the url for the post.</param>
 		/// <param name="postItems">The values for the post.</param>
-		public PostSubmitter(string url, QueryString postItems)
+		public HttpRequest(string url, QueryString postItems)
 			: this(url)
 		{
-			PostItems = postItems;
+			Parameters = postItems;
 		}
 
 		/// <summary>
 		/// Posts the supplied data to specified url.
 		/// </summary>
 		/// <returns>a string containing the result of the post.</returns>
-		public string Post()
+		public string Send()
 		{
-			string result = PostData(Url, PostItems.ToString(Type));
+			string result = SendRequest(Url, Parameters.ToString(Action));
 			return result;
 		}
 
 		/// <summary>
-		/// Posts the supplied data to specified url.
+		/// Sends the request to the specified url.
 		/// </summary>
-		/// <param name="url">The url to post to.</param>
-		/// <returns>a string containing the result of the post.</returns>
-		public string Post(string url)
+		/// <param name="url">The url to submit the request to</param>
+		/// <param name="parameters">The request parameters</param>
+		/// <returns>The response from the action.</returns>
+		public string Send(string url, QueryString parameters)
 		{
 			Url = url;
-			return this.Post();
-		}
-
-		/// <summary>
-		/// Posts the supplied data to specified url.
-		/// </summary>
-		/// <param name="url">The url to post to.</param>
-		/// <param name="postItems">The values to post.</param>
-		/// <returns>a string containing the result of the post.</returns>
-		public string Post(string url, QueryString postItems)
-		{
-			PostItems = postItems;
-			return this.Post(url);
+			Parameters = parameters;
+			return Send();
 		}
 
 		/// <summary>
@@ -97,32 +87,32 @@ namespace Triggerfish.Web
 		/// <param name="callback">Callback delegate</param>
 		/// <param name="state">Request state object</param>
 		/// <returns>An asynchronous result</returns>
-		public IAsyncResult BeginPost(AsyncCallback callback, object state)
+		public IAsyncResult BeginSend(AsyncCallback callback, object state)
 		{
-			HttpWebRequest request = BuildRequest(Url, PostItems.ToString(Type));
+			HttpWebRequest request = BuildRequest(Url, Parameters.ToString(Action));
 			return request.BeginGetResponse(callback, state);
 		}
 
-		private HttpWebRequest BuildRequest(string url, string postData)
+		private HttpWebRequest BuildRequest(string url, string parameters)
 		{
 			HttpWebRequest request = null;
-			if (Type == PostTypeEnum.Post)
+			if (Action == HttpAction.Post)
 			{
 				Uri uri = new Uri(url);
 				request = (HttpWebRequest)WebRequest.Create(uri);
 				request.Method = "POST";
 				request.ContentType = "application/x-www-form-urlencoded";
-				request.ContentLength = postData.Length;
+				request.ContentLength = parameters.Length;
 				using (Stream writeStream = request.GetRequestStream())
 				{
 					UTF8Encoding encoding = new UTF8Encoding();
-					byte[] bytes = encoding.GetBytes(postData);
+					byte[] bytes = encoding.GetBytes(parameters);
 					writeStream.Write(bytes, 0, bytes.Length);
 				}
 			}
 			else
 			{
-				Uri uri = new Uri(url + "?" + postData);
+				Uri uri = new Uri(url + "?" + parameters);
 				request = (HttpWebRequest)WebRequest.Create(uri);
 				request.Method = "GET";
 			}
@@ -130,9 +120,9 @@ namespace Triggerfish.Web
 			return request;
 		}
 
-		private string PostData(string url, string postData)
+		private string SendRequest(string url, string parameters)
 		{
-			HttpWebRequest request = BuildRequest(url, postData);
+			HttpWebRequest request = BuildRequest(url, parameters);
 
 			string result = string.Empty;
 			using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())

@@ -62,6 +62,7 @@
     <Compile Include="Diagnostics\DiagnosticsResponseFilterTest.cs" />
     <Compile Include="Mvc\Binding\BinderResolverTests.cs" />
     <Compile Include="Mvc\Binding\ModelBinderTests.cs" />
+    <Compile Include="QueryStringTests.cs" />
     <Compile Include="Mvc\Filters\AuthoriseAttributeTests.cs" />
     <Compile Include="Mvc\Filters\TransactionAttributeTests.cs" />
     <Compile Include="Mvc\ValidationExtensionsTests.cs" />

@@ -16,6 +16,26 @@ namespace Triggerfish.Web
 	public class QueryString : NameValueCollection
 	{
 		/// <summary>
+		/// Overridden indexer to decode the value
+		/// </summary>
+		/// <param name="index">The index</param>
+		/// <returns>The decoded value</returns>
+		public new string this[int index]
+		{
+			get { return HttpUtility.UrlDecode(base[index]); }
+		}
+
+		/// <summary>
+		/// Overridden indexer to decode the value
+		/// </summary>
+		/// <param name="index">The key name</param>
+		/// <returns>The decoded value</returns>
+		public new string this[string name]
+		{
+			get { return HttpUtility.UrlDecode(base[name]); }
+		}
+
+		/// <summary>
 		/// Constructor
 		/// </summary>
 		public QueryString() { }
@@ -27,6 +47,29 @@ namespace Triggerfish.Web
 		public QueryString(string queryString)
 		{
 			FillFromString(queryString);
+		}
+
+		/// <summary>
+		/// Tests whether or not the given key exists
+		/// </summary>
+		/// <param name="key">The key</param>
+		/// <returns>True if the key exists, false otherwise</returns>
+		public bool Contains(string key)
+		{
+			string val = base[key];
+			return !String.IsNullOrEmpty(val);
+		}
+
+		/// <summary>
+		/// Adds a new parameter
+		/// </summary>
+		/// <param name="key">The parameter key</param>
+		/// <param name="value">The parameter value</param>
+		/// <returns>This to enable method chaining</returns>
+		public new QueryString Add(string key, string value)
+		{
+			base.Add(key, value);
+			return this;
 		}
 
 		/// <summary>
@@ -64,65 +107,12 @@ namespace Triggerfish.Web
 		}
 
 		/// <summary>
-		/// Add a name value pair to the collection
-		/// </summary>
-		/// <param name="name">The name</param>
-		/// <param name="value">The value associated to the name</param>
-		/// <returns>The QueryString object</returns>
-		public new QueryString Add(string name, string value)
-		{
-			string existingValue = base[name];
-			if (string.IsNullOrEmpty(existingValue))
-				base.Add(name, HttpUtility.UrlEncodeUnicode(value));
-			else
-				base[name] += "," + HttpUtility.UrlEncodeUnicode(value);
-			return this;
-		}
-
-		/// <summary>
-		/// Overrides the default indexer
-		/// </summary>
-		/// <param name="name">Name index into the collection</param>
-		/// <returns>The associated decoded value for the specified name</returns>
-		public new string this[string name]
-		{
-			get
-			{
-				return HttpUtility.UrlDecode(base[name]);
-			}
-		}
-
-		/// <summary>
-		/// Overrides the default indexer
-		/// </summary>
-		/// <param name="index">Index into the collection</param>
-		/// <returns>The associated decoded value for the specified index</returns>
-		public new string this[int index]
-		{
-			get
-			{
-				return HttpUtility.UrlDecode(base[index]);
-			}
-		}
-
-		/// <summary>
-		/// Checks if a name already exists within the query string collection
-		/// </summary>
-		/// <param name="name">The name to check</param>
-		/// <returns>True if the name exists, false otherwise</returns>
-		public bool Contains(string name)
-		{
-			string existingValue = base[name];
-			return !string.IsNullOrEmpty(existingValue);
-		}
-
-		/// <summary>
 		/// Outputs the QueryString object to a string as a HTTP GET
 		/// </summary>
 		/// <returns>The encoded QueryString as it would appear in a browser</returns>
 		public override string ToString()
 		{
-			return ToString(PostTypeEnum.Get);
+			return ToString(HttpAction.Get);
 		}
 
 		/// <summary>
@@ -130,25 +120,22 @@ namespace Triggerfish.Web
 		/// </summary>
 		/// <param name="type">The type of HTTP action the query will be used in</param>
 		/// <returns>The encoded QueryString as it would appear in a browser</returns>
-		public string ToString(PostTypeEnum type)
+		public string ToString(HttpAction type)
 		{
-			StringBuilder builder = new StringBuilder();
-			for (var i = 0; i < base.Keys.Count; i++)
+			StringBuilder sb = new StringBuilder();
+			if (type == HttpAction.Get)
 			{
-				if (!string.IsNullOrEmpty(base.Keys[i]))
-				{
-					string prefix = String.Empty;
-					if (type == PostTypeEnum.Get)
-					{
-						prefix = "?";
-					}
-					foreach (string val in base[base.Keys[i]].Split(','))
-					{
-						builder.Append((builder.Length == 0) ? prefix : "&").Append(HttpUtility.UrlEncodeUnicode(base.Keys[i])).Append("=").Append(val);
-					}
-				}
+				sb.Append("?");
+			} 
+
+			foreach (string key in Keys)
+			{
+				if (sb.Length > 1)
+					sb.Append("&");
+				sb.AppendFormat("{0}={1}", HttpUtility.UrlEncodeUnicode(key), HttpUtility.UrlEncodeUnicode(this[key]));
 			}
-			return builder.ToString();
+
+			return sb.ToString();
 		}
 	}
 }

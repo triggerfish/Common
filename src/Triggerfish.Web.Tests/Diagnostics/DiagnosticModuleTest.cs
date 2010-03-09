@@ -12,7 +12,7 @@ namespace Triggerfish.Web.Tests.Diagnostics
 	[TestClass]
 	public class DiagnosticModuleTest
 	{
-		HttpContext m_ctx = new HttpContext(new HttpRequest(null, "http://localhost/", null), new HttpResponse(new StringWriter()));
+		HttpContext m_ctx = new HttpContext(new System.Web.HttpRequest(null, "http://localhost/", null), new HttpResponse(new StringWriter()));
 
 		[TestMethod]
 		public void ShouldStart()

@@ -55,7 +55,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IPostSubmitter.cs" />
+    <Compile Include="IHttpRequest.cs" />
     <Compile Include="Diagnostics\IDiagnostics.cs" />
     <Compile Include="Diagnostics\DiagnosticsResponseFilter.cs" />
     <Compile Include="Diagnostics\DiagnosticsModule.cs" />
@@ -80,7 +80,7 @@
     <Compile Include="Mvc\Paging\PageUrlGenerator.cs" />
     <Compile Include="Mvc\Filters\TempDataAttribute.cs" />
     <Compile Include="Mvc\ValidatorExtensions.cs" />
-    <Compile Include="PostSubmitter.cs" />
+    <Compile Include="HttpRequest.cs" />
     <Compile Include="QueryString.cs" />
     <Compile Include="Routing\RouteValueDictionaryExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
