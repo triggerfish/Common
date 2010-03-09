@@ -17,6 +17,14 @@ namespace Triggerfish.Database
 		IUnitOfWork GetCurrentUnitOfWork();
 
 		/// <summary>
+		/// Creates the current UoW. The method will only
+		/// create a new UoW if one is not already active. 
+		/// Otherwise the existing UoW is returned
+		/// </summary>
+		/// <returns>The current IUnitOfWork</returns>
+		IUnitOfWork CreateUnitOfWork();
+
+		/// <summary>
 		/// Closes the current unit of work
 		/// </summary>
 		void CloseCurrentUnitOfWork();

@@ -84,16 +84,7 @@ namespace Triggerfish.NHibernate
 		/// <returns>An ISession</returns>
 		public static ISession GetCurrentSession()
 		{
-			UnitOfWork uow = GetCurrentUnitOfWork() as UnitOfWork;
-
-			if (null == uow || !uow.IsActive)
-			{
-				uow = new UnitOfWork(m_sessionFactory.OpenSession());
-				uow.Begin();
-				Storage.SetCurrentUnitOfWork(uow);
-			}
-
-			return uow.Session;
+			return ((UnitOfWork)CreateUnitOfWork()).Session;
 		}
 
 		/// <summary>
@@ -103,6 +94,26 @@ namespace Triggerfish.NHibernate
 		public static IUnitOfWork GetCurrentUnitOfWork()
 		{
 			return Storage.GetCurrentUnitOfWork();
+		}
+
+		/// <summary>
+		/// Creates the current UoW. The method will only
+		/// create a new UoW if one is not already active. 
+		/// Otherwise the existing UoW is returned
+		/// </summary>
+		/// <returns>The current IUnitOfWork</returns>
+		public static IUnitOfWork CreateUnitOfWork()
+		{
+			UnitOfWork uow = GetCurrentUnitOfWork() as UnitOfWork;
+
+			if (null == uow || !uow.IsActive)
+			{
+				uow = new UnitOfWork(m_sessionFactory.OpenSession());
+				uow.Begin();
+				Storage.SetCurrentUnitOfWork(uow);
+			}
+
+			return uow;
 		}
 
 		/// <summary>
@@ -133,6 +144,17 @@ namespace Triggerfish.NHibernate
 		void IUnitOfWorkFactory.CloseCurrentUnitOfWork()
 		{
 			UnitOfWorkFactory.CloseCurrentUnitOfWork();
+		}
+
+		/// <summary>
+		/// Creates the current UoW. The method will only
+		/// create a new UoW if one is not already active. 
+		/// Otherwise the existing UoW is returned
+		/// </summary>
+		/// <returns>The current IUnitOfWork</returns>
+		IUnitOfWork IUnitOfWorkFactory.CreateUnitOfWork()
+		{
+			return UnitOfWorkFactory.CreateUnitOfWork();
 		}
 	}
 }
