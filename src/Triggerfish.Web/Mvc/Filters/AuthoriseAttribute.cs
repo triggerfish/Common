@@ -11,7 +11,7 @@ namespace Triggerfish.Web.Mvc
 	/// any other attribute filters
 	/// </summary>
 	[AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, Inherited = true, AllowMultiple = false)]
-	public class AuthoriseAttribute : ActionFilterAttribute
+	public class AuthoriseAttribute : AuthorizeAttribute
 	{
 		/// <summary>
 		/// A url to redirect to if not authenticated. Not applicable
@@ -35,23 +35,18 @@ namespace Triggerfish.Web.Mvc
 		}
 
 		/// <summary>
-		/// Executed before the action method
+		/// Authorisation handler
 		/// </summary>
-		/// <param name="filterContext">The filter context</param>
-		public override void OnActionExecuting(ActionExecutingContext filterContext)
+		/// <param name="filterContext">The context</param>
+		public override void OnAuthorization(AuthorizationContext filterContext)
 		{
-			base.OnActionExecuting(filterContext);
+			base.OnAuthorization(filterContext);
 
-			if (!filterContext.HttpContext.User.Identity.IsAuthenticated)
+			// authorisation is required, but we want to override the default behaviour to
+			// redirect away from the page
+			if (filterContext.Result is HttpUnauthorizedResult && !DoAuthorise)
 			{
-				if (DoAuthorise)
-				{
-					filterContext.Result = new HttpUnauthorizedResult();
-				}
-				else
-				{
-					filterContext.Result = new RedirectResult(RedirectTo);
-				}
+				filterContext.Result = new RedirectResult(RedirectTo);
 			}
 		}
 	}

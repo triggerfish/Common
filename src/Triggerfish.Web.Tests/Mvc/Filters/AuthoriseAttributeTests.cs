@@ -14,39 +14,36 @@ namespace Triggerfish.Web.Tests
 	[TestClass]
 	public class AuthoriseAttributeTests
 	{
+		private AuthorizationContext m_context = new AuthorizationContext();
+		private Mock<HttpContextBase> m_httpContext;
+
 		[TestMethod]
 		public void ShouldDoNothingIfAuthenticated()
 		{
 			// arrange
-			Mock<HttpContextBase> httpContext = MockHelpers.HttpContext("").WithUser(MockHelpers.User().WithIdentity(MockHelpers.Identity().WithAuthenticationStatus(true)));
-			ActionExecutingContext context = new ActionExecutingContext();
-			context.HttpContext = httpContext.Object;
+			m_httpContext.WithUser(MockHelpers.User().WithIdentity(MockHelpers.Identity().WithAuthenticationStatus(true)));
 
 			AuthoriseAttribute attr = new AuthoriseAttribute();
 
 			// act
-			attr.OnActionExecuting(context);
+			attr.OnAuthorization(m_context);
 
 			// assert
-			Assert.AreEqual(null, context.Result);
+			Assert.AreEqual(null, m_context.Result);
 		}
 
 		[TestMethod]
 		public void ShouldRedirectIfNotAuthenticated()
 		{
 			// arrange
-			Mock<HttpContextBase> httpContext = MockHelpers.HttpContext("").WithUser(MockHelpers.User().WithIdentity(MockHelpers.Identity().WithAuthenticationStatus(false)));
-			ActionExecutingContext context = new ActionExecutingContext();
-			context.HttpContext = httpContext.Object;
-
 			AuthoriseAttribute attr = new AuthoriseAttribute { RedirectTo = "/here" };
 
 			// act
-			attr.OnActionExecuting(context);
+			attr.OnAuthorization(m_context);
 
 			// assert
-			Assert.IsTrue(context.Result is RedirectResult);
-			RedirectResult redirect = context.Result as RedirectResult;
+			Assert.IsTrue(m_context.Result is RedirectResult);
+			RedirectResult redirect = m_context.Result as RedirectResult;
 			Assert.AreEqual("/here", redirect.Url);
 		}
 	
@@ -54,17 +51,24 @@ namespace Triggerfish.Web.Tests
 		public void ShouldAuthoriseIfNotAuthenticated()
 		{
 			// arrange
-			Mock<HttpContextBase> httpContext = MockHelpers.HttpContext("").WithUser(MockHelpers.User().WithIdentity(MockHelpers.Identity().WithAuthenticationStatus(false)));
-			ActionExecutingContext context = new ActionExecutingContext();
-			context.HttpContext = httpContext.Object;
-
 			AuthoriseAttribute attr = new AuthoriseAttribute { RedirectTo = "/here", DoAuthorise = true };
 
 			// act
-			attr.OnActionExecuting(context);
+			attr.OnAuthorization(m_context);
 
 			// assert
-			Assert.IsTrue(context.Result is HttpUnauthorizedResult);
+			Assert.IsTrue(m_context.Result is HttpUnauthorizedResult);
+		}
+
+		[TestInitialize]
+		public void SetupTest()
+		{
+			Mock<HttpResponseBase> response = new Mock<HttpResponseBase>();
+			response.Setup(x => x.Cache).Returns(new Mock<HttpCachePolicyBase>().Object);
+			m_httpContext = MockHelpers.HttpContext("");
+			m_httpContext.WithUser(MockHelpers.User().WithIdentity(MockHelpers.Identity().WithAuthenticationStatus(false)));
+			m_httpContext.Setup(x => x.Response).Returns(response.Object);
+			m_context.HttpContext = m_httpContext.Object;
 		}
 	}
 }
