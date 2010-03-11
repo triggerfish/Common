@@ -54,6 +54,7 @@
     <Compile Include="Database\IUnitOfWorkStorage.cs" />
     <Compile Include="Database\IUnitOfWork.cs" />
     <Compile Include="Database\UnitOfWorkStorageType.cs" />
+    <Compile Include="Linq\IListExtensions.cs" />
     <Compile Include="Maths.cs" />
     <Compile Include="Linq\MemberPathVisitor.cs" />
     <Compile Include="Linq\ExpressionVisitor.cs" />

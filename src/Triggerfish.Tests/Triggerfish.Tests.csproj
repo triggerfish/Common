@@ -39,6 +39,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CurrencyTests.cs" />
+    <Compile Include="Linq\IListExtensionsTests.cs" />
     <Compile Include="MathsTests.cs" />
     <Compile Include="Security\BCryptEncryptorTests.cs" />
     <Compile Include="Database\EntityTests.cs" />
