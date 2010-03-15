@@ -60,9 +60,11 @@
     <Compile Include="Diagnostics\DiagnosticsResponseFilter.cs" />
     <Compile Include="Diagnostics\DiagnosticsModule.cs" />
     <Compile Include="Mvc\Binding\BinderResolver.cs" />
+    <Compile Include="Mvc\HtmlExtensions.cs" />
     <Compile Include="Mvc\Filters\AuthoriseAttribute.cs" />
     <Compile Include="Mvc\Binding\ModelBinder.cs" />
     <Compile Include="Mvc\Filters\TransactionAttribute.cs" />
+    <Compile Include="Hyperlink.cs" />
     <Compile Include="Mvc\Paging\PageLinkExtensions.cs" />
     <Compile Include="Mvc\Paging\FirstPrevNextLastPageLinkHtmlGenerator.cs" />
     <Compile Include="Mvc\HtmlHelpers.cs" />
