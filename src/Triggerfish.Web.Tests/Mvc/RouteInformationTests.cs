@@ -10,7 +10,7 @@ using Triggerfish.Web.Mvc.Testing;
 using Triggerfish.Web.Routing.Testing;
 using Triggerfish.Web.Mvc;
 
-namespace Triggerfish.Testing.Tests
+namespace Triggerfish.Web.Tests
 {
 	[TestClass]
 	public class RouteInformationTests

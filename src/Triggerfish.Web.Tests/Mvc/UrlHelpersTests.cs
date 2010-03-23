@@ -5,9 +5,9 @@ using System.Text;
 using System.Web.Mvc;
 using System.Web.Routing;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Triggerfish.Web.Mvc.Testing;
+using Triggerfish.Web.Mvc;
 
-namespace Triggerfish.Testing.Tests
+namespace Triggerfish.Web.Tests
 {
 	public class UrlHelpersTests
 	{

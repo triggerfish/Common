@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using System.Security;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
@@ -14,7 +15,13 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
-[assembly: InternalsVisibleTo("Triggerfish.NHibernate.Tests")]
+[assembly: AllowPartiallyTrustedCallers]
+[assembly: InternalsVisibleTo("Triggerfish.NHibernate.Tests, PublicKey="
+	+ "0024000004800000940000000602000000240000525341310004000001000100818381ba3f34fa"
+	+ "435820a886a3da9c9cea187b2fb7a0de877f61dd60064043117f8027f59dd7c317c839695469f6"
+	+ "3c54e95c7b3d71d4eccbefbbedbfd8b0401767aca347d7d13c71e71d22ff836a59bf00013f66bf"
+	+ "f06b9b8539831ffbd8d0b56c506c6557e914c4b7b2924ac80f49bf45d4f7a282104e949a9c9c16"
+	+ "5e6aafcb")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 
 // to COM components.  If you need to access a type in this assembly from 

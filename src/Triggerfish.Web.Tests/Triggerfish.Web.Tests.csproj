@@ -12,6 +12,8 @@
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\Triggerfish.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -40,10 +42,6 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
-    <Reference Include="System.Data" />
-    <Reference Include="System.Data.DataSetExtensions">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Abstractions">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -52,16 +50,14 @@
     <Reference Include="System.Web.Routing">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
-    <Reference Include="System.Xml" />
-    <Reference Include="System.Xml.Linq">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Diagnostics\DiagnosticModuleTest.cs" />
     <Compile Include="Diagnostics\DiagnosticsResponseFilterTest.cs" />
     <Compile Include="Mvc\Binding\BinderResolverTests.cs" />
     <Compile Include="Mvc\Binding\ModelBinderTests.cs" />
+    <Compile Include="Mvc\RouteInformationTests.cs" />
+    <Compile Include="Mvc\UrlHelpersTests.cs" />
     <Compile Include="QueryStringTests.cs" />
     <Compile Include="Mvc\Filters\AuthoriseAttributeTests.cs" />
     <Compile Include="Mvc\Filters\TransactionAttributeTests.cs" />

@@ -6,7 +6,7 @@ using System.Web.Routing;
 using System.Reflection;
 using System.Web.Mvc;
 
-namespace Triggerfish.Web.Mvc.Testing
+namespace Triggerfish.Web.Mvc
 {
 	/// <summary>
 	/// Helper class to lookup a route based on a string url 
@@ -80,7 +80,7 @@ namespace Triggerfish.Web.Mvc.Testing
 			}
 
 			RouteCollection routes = new RouteCollection();
-			RouteValues = InboundRoutingHelpers.GenerateInboundRoute(url, registerRoutes);
+			RouteValues = GenerateInboundRoute(url, registerRoutes);
 		}
 
 		/// <summary>
@@ -148,6 +148,52 @@ namespace Triggerfish.Web.Mvc.Testing
 				return (string)RouteValues[key];
 			}
 			return null;
+		}
+
+		private RouteValueDictionary GenerateInboundRoute(string url, Action<RouteCollection> registerRoutes)
+		{
+			RouteCollection routes = new RouteCollection();
+			registerRoutes(routes);
+
+			HttpContextBase mockHttp = new FakeHttpContextBase(new FakeHttpRequestBase(url), new FakeHttpResponseBase());
+
+			RouteData data = routes.GetRouteData(mockHttp);
+			if (null != data)
+			{
+				return data.Values;
+			}
+
+			return null;
+		}
+
+		private class FakeHttpContextBase : HttpContextBase
+		{
+			private HttpRequestBase m_request;
+			private HttpResponseBase m_response;
+
+			public FakeHttpContextBase(HttpRequestBase request, HttpResponseBase response) : base() { m_request = request; m_response = response; }
+
+			public override HttpRequestBase Request { get { return m_request; } }
+		}
+
+		private class FakeHttpRequestBase : HttpRequestBase
+		{
+			private string m_url;
+
+			public FakeHttpRequestBase(string url) : base() { m_url = url; }
+
+			public override string AppRelativeCurrentExecutionFilePath { get { return m_url; } }
+			public override string PathInfo { get { return ""; } }
+		}
+
+		private class FakeHttpResponseBase : HttpResponseBase
+		{
+			public FakeHttpResponseBase() : base() { }
+
+			public override string ApplyAppPathModifier(string virtualPath)
+			{
+				return virtualPath;
+			}
 		}
 	}
 }

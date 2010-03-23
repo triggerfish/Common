@@ -12,6 +12,8 @@
     <AssemblyName>Triggerfish.Testing</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\Triggerfish.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -50,26 +52,15 @@
     <Reference Include="System.Web.Routing">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
-    <Reference Include="System.Xml.Linq">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Data.DataSetExtensions">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Web\MockExtensions.cs" />
     <Compile Include="Web\Mvc\BinderHelpers.cs" />
-    <Compile Include="Web\Mvc\RouteInformationExtensions.cs" />
     <Compile Include="Web\Mvc\MvcAsserts.cs" />
     <Compile Include="Web\Mvc\OutboundRoutingHelpers.cs" />
     <Compile Include="Web\Mvc\InboundRoutingHelpers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Web\MockHelpers.cs" />
-    <Compile Include="Web\Mvc\RouteInformation.cs" />
-    <Compile Include="Web\Mvc\UrlHelpers.cs" />
     <Compile Include="Web\Routing\RoutingAsserts.cs" />
   </ItemGroup>
   <ItemGroup>

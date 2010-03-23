@@ -5,7 +5,7 @@ using System.Text;
 using System.Web.Routing;
 using System.Reflection;
 
-namespace Triggerfish.Web.Mvc.Testing
+namespace Triggerfish.Web.Mvc
 {
 	/// <summary>
 	/// Static helper methods for processing urls
