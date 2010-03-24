@@ -1,6 +1,7 @@
 ﻿using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using System.Reflection;
+using Triggerfish.Database;
 
 namespace Triggerfish.NHibernate
 {
@@ -9,18 +10,15 @@ namespace Triggerfish.NHibernate
 	/// </summary>
 	public class SqlServerDatabase : IDatabaseConfiguration
     {
-		private readonly string m_server;
-		private readonly string m_database;
+		private readonly IConnectionParameters m_connectionParams;
 
 		/// <summary>
 		/// Constructor
 		/// </summary>
-		/// <param name="server">The path to the server</param>
-		/// <param name="database">The name of the database</param>
-		public SqlServerDatabase(string server, string database)
+		/// <param name="connectionParams">The database connection parameters</param>
+		public SqlServerDatabase(IConnectionParameters connectionParams)
 		{
-			m_server = server;
-			m_database = database;
+			m_connectionParams = connectionParams;
 		}
 
 		/// <summary>
@@ -30,13 +28,27 @@ namespace Triggerfish.NHibernate
 		/// <returns>SQL Server configuration</returns>
 		IPersistenceConfigurer IDatabaseConfiguration.Create(Assembly assembly)
 		{
-			return MsSqlConfiguration.MsSql2005
-						.ConnectionString(c => c
-							.Server(m_server)
-							.Database(m_database)
-							.TrustedConnection())
+			MsSqlConfiguration config = MsSqlConfiguration.MsSql2005
 						.ProxyFactoryFactory("NHibernate.ByteCode.LinFu.ProxyFactoryFactory, NHibernate.ByteCode.LinFu")
 						.ShowSql();
+
+			if (m_connectionParams.NTauth)
+			{
+				config.ConnectionString(c => c
+							.Server(m_connectionParams.Server)
+							.Database(m_connectionParams.Database)
+							.TrustedConnection());
+			}
+			else
+			{
+				config.ConnectionString(c => c
+							.Server(m_connectionParams.Server)
+							.Database(m_connectionParams.Database)
+							.Username(m_connectionParams.Username)
+							.Password(m_connectionParams.Password));
+			}
+
+			return config;
 		}
     }
 }
