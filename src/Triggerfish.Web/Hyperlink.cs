@@ -29,5 +29,10 @@ namespace Triggerfish.Web
 		/// True if the link is selected (currently displayed), false otherwise
 		/// </summary>
 		public bool IsSelected { get; set; }
+
+		/// <summary>
+		/// True if the link is https, false if https
+		/// </summary>
+		public bool RequiresSSL { get; set; }
 	}
 }

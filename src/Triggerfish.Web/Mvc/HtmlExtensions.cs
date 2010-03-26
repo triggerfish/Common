@@ -39,5 +39,18 @@ namespace Triggerfish.Web.Mvc
 			}
 			return html.RouteLink(link.Text, link.Route, attrs);
 		}
+
+		/// <summary>
+		/// Creates an absolute html anchor tag for the Hyperlink object
+		/// </summary>
+		/// <param name="html">Extension method on HtmlHelper</param>
+		/// <param name="link">The Hyperlink</param>
+		/// <param name="domain">The domain, eg www.example.com</param>
+		/// <returns>An html string</returns>
+		public static string RouteLinkToAbsolute(this HtmlHelper html, Hyperlink link, string domain)
+		{
+			string proto = link.RequiresSSL ? "https" : "http";
+			return html.RouteLink(link.Text, "", proto, domain, "", link.Route, null);
+		}
 	}
 }
