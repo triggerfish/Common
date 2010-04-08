@@ -22,10 +22,11 @@ namespace Triggerfish.Web.Tests
 		public void ShouldNotCommitIfModelStateInvalid()
 		{
 			// arrange
+			Resolver.Get();
 			TransactionAttribute.FactoryResolver = Resolver.Get;
 			TransactionAttribute attr = new TransactionAttribute();
 			m_context.Controller.ViewData.ModelState.AddModelError("Data", "Error");
-			Resolver.Reset();
+			//Resolver.Reset();
 
 			// act
 			attr.OnResultExecuted(m_context);
@@ -38,9 +39,10 @@ namespace Triggerfish.Web.Tests
 		public void ShouldNotCommitIfNullUoW()
 		{
 			// arrange
+			Resolver.Get();
 			TransactionAttribute.FactoryResolver = Resolver.Get;
 			TransactionAttribute attr = new TransactionAttribute();
-			Resolver.Reset();
+			//Resolver.Reset();
 			Resolver.ReturnNullUoW = true;
 
 			// act

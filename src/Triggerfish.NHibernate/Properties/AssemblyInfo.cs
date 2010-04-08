@@ -17,11 +17,11 @@ using System.Security;
 
 [assembly: AllowPartiallyTrustedCallers]
 [assembly: InternalsVisibleTo("Triggerfish.NHibernate.Tests, PublicKey="
-	+ "0024000004800000940000000602000000240000525341310004000001000100818381ba3f34fa"
-	+ "435820a886a3da9c9cea187b2fb7a0de877f61dd60064043117f8027f59dd7c317c839695469f6"
-	+ "3c54e95c7b3d71d4eccbefbbedbfd8b0401767aca347d7d13c71e71d22ff836a59bf00013f66bf"
-	+ "f06b9b8539831ffbd8d0b56c506c6557e914c4b7b2924ac80f49bf45d4f7a282104e949a9c9c16"
-	+ "5e6aafcb")]
+	+ "00240000048000009400000006020000002400005253413100040000010001004b83b9d93479cf"
+	+ "bb4dcc29da5320974df726b94be736905f91667c2fb964b50926eb4bdd54aa0cf06522845b9f94"
+	+ "4e848afd51fbe4762318e7e1b53ca1a7698f589f0715536c022f8e65934780713b49ac493a8338"
+	+ "eab693d4f1d67bc27aed99bb053fa594393d19134c2e0ac519859ecd7220c991e7c47ff74c3963"
+	+ "2c40daf7")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 
 // to COM components.  If you need to access a type in this assembly from 

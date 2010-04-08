@@ -31,7 +31,11 @@ namespace Triggerfish.Web.Mvc
 				IUnitOfWorkFactory factory = FactoryResolver();
 				if (factory != null)
 				{
-					factory.GetCurrentUnitOfWork().Commit();
+					IUnitOfWork uow = factory.GetCurrentUnitOfWork();
+					if (uow != null)
+					{
+						uow.Commit();
+					}
 				}
 			}
 		}
